@@ -34,20 +34,20 @@
                     </div>
                     </div>
 
-                    <div class="sm:w-2/3 sm:pl-8 sm:py-8 sm:border-l border-gray-200 sm:border-t-0 border-t mt-4 pt-4 sm:mt-0 text-center sm:text-left">
+                    <div class="sm:w-2/3 sm:pl-8 sm:py-8 sm:border-l border-blue-700 sm:border-t-0 border-t mt-4 pt-4 sm:mt-0 text-center sm:text-left">
                     <p class="leading-relaxed text-lg mb-4">
                         <span class="text-blue-500 font-bold">Razon social:</span>  {{ $empleador->razon_social}}  <br>
-                            <div class="w-120 h-0.5 bg-indigo-300 rounded mt-2 mb-4"></div>
+                            <div class="w-100 h-0.5 bg-indigo-300 rounded mt-2 mb-4"></div>
                         <span class="text-blue-500 font-bold">Tipo de empresa:</span> {{ $empleador->tipo_de_empresa}}  <br>
                             <div class="w-60 h-0.5 bg-indigo-300 rounded mt-2 mb-5"></div>
                         <span class="text-blue-500 font-bold">Sector:</span>  {{ $empleador->sector}}<br>
-                            <div class="w-100 h-0.5 bg-indigo-300 rounded mt-2 mb-5"></div>
+                            <div class="w-75 h-0.5 bg-indigo-300 rounded mt-2 mb-5"></div>
                         <span class="text-blue-500 font-bold">Giro:</span>  {{ $empleador->giro}}<br>
                             <div class="w-100 h-0.5 bg-indigo-300 rounded mt-2 mb-5"></div>
                         <span class="text-blue-500 font-bold">Num. empeados:</span>  {{ $empleador->numero_empleados}}<br>
-                            <div class="w-100 h-0.5 bg-indigo-300 rounded mt-2 mb-5"></div>
+                            <div class="w-50 h-0.5 bg-indigo-300 rounded mt-2 mb-5"></div>
                         <span class="text-blue-500 font-bold">Direccion empresa:</span>  {{ $empleador->direccion_empresa}}, {{ $empleador->colonia}} {{ $empleador->codigo_postal}}, {{ $empleador->ciudad}}, {{ $empleador->estado}} {{ $empleador->pais}}<br>
-                            <div class="w-100 h-0.5 bg-indigo-300 rounded mt-2 mb-5"></div>
+                            <div class="w-150 h-0.5 bg-indigo-300 rounded mt-2 mb-5"></div>
                     </p>
                     </div>
 
@@ -60,7 +60,7 @@
             @if ($ofResidencias->isNotEmpty())
                 <p class="text-center text-xl font-bold text-blue-900 ">Residencias creadas por el empleador</p><br>
                 @foreach ($ofResidencias as $Residencia)
-                    <div class="bg-gray-50 border border-gray-200 p-6 rounded-lg mb-3">
+                    <div class="bg-blue-50 border border-gray-200 p-6 rounded-lg mb-3">
                         <div class="w-10 h-10 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4">
                             <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
                                 <img src="{{ asset('images/egreso.png') }}" alt="Logo de la empresa" class="w-15 h-10">
@@ -91,7 +91,7 @@
             @if ($ofTrabajos->isNotEmpty())
                 <p class="text-center text-xl font-bold text-blue-900">Trabajos creados por el empleador</p><br>
                 @foreach ($ofTrabajos as $Trabajo)
-                    <div class="bg-gray-50 border border-gray-200 p-6 rounded-lg">
+                    <div class="bg-blue-50 border border-gray-200 p-6 rounded-lg">
                         <div class="w-10 h-10 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4">
                             <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
                                 <img src="{{ asset('images/trabajo.png') }}" alt="Logo de la empresa" class="w-15 h-10">

@@ -6,8 +6,8 @@
     <a href="/mostrarEmpleadores" class="font-bold text-purple-700">Empleadores</a>
 </nav>
 <br>
-
 <div class="bg-white py-6 sm:py-8 lg:py-12">
+  <h3 class=" text-center px-60 md:mr-auto text-2xl font-bold mb-4 items-center">Detalles de la oferta</h3>
     <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
       <div class="flex overflow-hidden rounded-lg bg-gray-100">
         <div class="relative hidden bg-gray-200 sm:block sm:w-1/3 lg:w-1/2">
