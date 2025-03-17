@@ -60,7 +60,7 @@
             @if ($ofResidencias->isNotEmpty())
                 <p class="text-center text-xl font-bold text-blue-900 ">Residencias creadas por el empleador</p><br>
                 @foreach ($ofResidencias as $Residencia)
-                    <div class="border border-gray-200 p-6 rounded-lg mb-3">
+                    <div class="bg-gray-50 border border-gray-200 p-6 rounded-lg mb-3">
                         <div class="w-10 h-10 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4">
                             <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
                                 <img src="{{ asset('images/egreso.png') }}" alt="Logo de la empresa" class="w-15 h-10">
@@ -91,7 +91,7 @@
             @if ($ofTrabajos->isNotEmpty())
                 <p class="text-center text-xl font-bold text-blue-900">Trabajos creados por el empleador</p><br>
                 @foreach ($ofTrabajos as $Trabajo)
-                    <div class="border border-gray-200 p-6 rounded-lg">
+                    <div class="bg-gray-50 border border-gray-200 p-6 rounded-lg">
                         <div class="w-10 h-10 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4">
                             <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
                                 <img src="{{ asset('images/trabajo.png') }}" alt="Logo de la empresa" class="w-15 h-10">
