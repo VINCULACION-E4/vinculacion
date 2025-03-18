@@ -50,4 +50,12 @@ class UsuarioAlumnoController extends Controller
         return view('usuariosAlumnos.info', compact('alumno', 'usuarioAlumno', 'oferta', 'fecha'));
             
     }
+
+    public function actualizarAlumno(Request $request, $id) {
+        $user = UsuariosAlumno::where('alumno_numero_control', $id)->first();
+        $estado = $request->input('estado');
+        $user->estatus_residencia = $estado;
+        $user->save(); 
+        return view('layouts.actualizar');
+    }
 }
