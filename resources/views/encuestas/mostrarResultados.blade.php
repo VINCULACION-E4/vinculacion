@@ -5,21 +5,21 @@
     <h3 class="text-lg text-gray-700">Descripción: {{ $encuesta->descripcion }}</h3>
     <h3 class="text-md text-gray-600">ID: {{ $encuesta->idencuesta }}</h3>
 
-    <div class="mt-6 overflow-x-auto">
-        <table class="min-w-full border border-gray-300 bg-white shadow-md">
-            <thead>
-                <tr class="bg-blue-500 text-white">
+    <div class="w-full overflow-x-auto shadow-md rounded-lg">
+        <table class="min-w-full table-fixed"> <!-- Usamos table-fixed para columnas con el mismo tamaño -->
+            <thead class="bg-blue-500 text-white">
+                <tr>
                     @foreach ($preguntas as $preg)
-                        <th class="border px-4 py-2 text-center font-bold">{{ $preg->pregunta->texto }}</th>
+                        <th class="px-4 py-2 text-center truncate">{{ $preg->pregunta->texto }}</th>
                     @endforeach
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="bg-white divide-y divide-gray-200">
                 @foreach ($asRespuestas as $index => $asRespuesta)
                     @if ($index % count($preguntas) == 0)
-                        <tr class="border-b">
+                        <tr class="align-top"> <!-- La clase align-top asegura que las celdas se alineen en la parte superior -->
                     @endif
-                    <td class="border px-4 py-2 text-center">{{ $asRespuesta->respuesta->texto }}</td>
+                    <td class="px-4 py-2 text-center truncate">{{ $asRespuesta->respuesta->texto }}</td>
                     @if (($index + 1) % count($preguntas) == 0)
                         </tr>
                     @endif
@@ -27,5 +27,35 @@
             </tbody>
         </table>
     </div>
-</div>
+    
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const tableContainer = document.querySelector('.overflow-x-auto');
+        let isDragging = false;
+        let startX, scrollLeft;
+
+        tableContainer.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            startX = e.pageX - tableContainer.offsetLeft;
+            scrollLeft = tableContainer.scrollLeft;
+        });
+
+        tableContainer.addEventListener('mouseleave', () => {
+            isDragging = false;
+        });
+
+        tableContainer.addEventListener('mouseup', () => {
+            isDragging = false;
+        });
+
+        tableContainer.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            e.preventDefault();
+            const x = e.pageX - tableContainer.offsetLeft;
+            const walk = (x - startX) * 2; // Ajusta la velocidad del desplazamiento
+            tableContainer.scrollLeft = scrollLeft - walk;
+        });
+    });
+</script>
 @endsection
