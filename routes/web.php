@@ -33,6 +33,7 @@ Route::post('/editorEncuesta', [EncuestasController::class, 'create']);//crear n
 Route::get('/editorEncuesta', [EncuestasController::class, 'preguntas'])->name('encuestas.editor'); //abrir editor de encuesta sin reenviar datos
 Route::get('/editorEncuesta/{id}', [EncuestasController::class, 'editar'])->name('encuestas.editor'); //editor para actualizar encuesta
 Route::post('/editorEncuesta/{id}', [EncuestasController::class, 'actualizar']); //actualizar encuesta
+Route::get('/resultadosEncuesta/{id}', [EncuestasController::class, 'mostrarResultados']);
 //Vistas usuarioAlumno
 Route::get('/dashboard/encuestas',[AlumnoController::class, 'mostrarEncuestas']);
 Route::get('/dashboard/encuestas-respuesta{id}',[AlumnoController::class, 'responder']);

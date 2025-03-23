@@ -24,6 +24,7 @@ class AlumnoController extends Controller
     public function mandarRespuesta($id, Request $request){
         $respuestas = $request->input('respuestas'); 
         $ids = $request->input('ids'); 
+        $idEncuestaRealizada = $request->input('idEncuesta');
 
         foreach ($respuestas as $index => $respuesta) {
             $nuevaRespuesta = Respuesta::create([
@@ -33,6 +34,7 @@ class AlumnoController extends Controller
             $nuevaAsignacion = new RespuestasPregunta();
             $nuevaAsignacion->respuestas_idrespuestas = $nuevaRespuesta->idrespuestas;
             $nuevaAsignacion->preguntas_idpreguntas = $ids[$index]; 
+            $nuevaAsignacion->idencuesta = $idEncuestaRealizada;
             $nuevaAsignacion->save();
         }
         return view ('alumno.dashboard');

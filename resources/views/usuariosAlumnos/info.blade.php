@@ -47,45 +47,47 @@
             </div>
             <br>
             <div class="lg:w-4/6 mx-auto">
-                @if($usuarioAlumno->estatus_estudiante === 'Egresado')
-                    <div class="p-4 bg-green-200 text-green-800 rounded">
-                        <h3 class="font-bold">Este usuario actualmente es Empleado desde {{$fecha}}</h3>
-                        <h3>Nombre de la oferta : {{ $oferta->nombre }}</h3>
-                        <h3>Nombre de la empresa : {{ $oferta->usuarios_empleador->empleadore->razon_social}}</h3>
-                        <h3>Sitio web:   {{ $oferta->usuarios_empleador->empleadore->sitio_web}}</h3>
-                    </div>
-                 <!-- Menu si es residente  --> 
-                @elseif($usuarioAlumno->estatus_estudiante === 'Residente')
-                <div class="p-4 bg-blue-200 text-blue-800 rounded space-y-2">
-                    <h3 class="font-bold w-full">Este usuario actualmente es Residente desde {{$fecha}}</h3>
-                    <h3 class="w-full">Nombre de la oferta: {{ $oferta->nombre }}</h3>
-                
+                @if($oferta != null)
+                    @if($usuarioAlumno->estatus_estudiante === 'Egresado')
+                        <div class="p-4 bg-green-200 text-green-800 rounded">
+                            <h3 class="font-bold">Este usuario actualmente es Empleado desde {{$fecha}}</h3>
+                            <h3>Nombre de la oferta : {{ $oferta->nombre }}</h3>
+                            <h3>Nombre de la empresa : {{ $oferta->usuarios_empleador->empleadore->razon_social}}</h3>
+                            <h3>Sitio web:   {{ $oferta->usuarios_empleador->empleadore->sitio_web}}</h3>
+                        </div>
+                    <!-- Menu si es residente  --> 
+                    @elseif($usuarioAlumno->estatus_estudiante === 'Residente')
                     <div class="p-4 bg-blue-200 text-blue-800 rounded space-y-2">
                         <h3 class="font-bold w-full">Este usuario actualmente es Residente desde {{$fecha}}</h3>
                         <h3 class="w-full">Nombre de la oferta: {{ $oferta->nombre }}</h3>
                     
-                        <div class="w-full bg-indigo-300 rounded mt-2 mb-4 p-2 flex flex-wrap items-center gap-2">
-                            <form action="/infoAlumno/{{$usuarioAlumno->alumno_numero_control}}" method="POST">
-                                @csrf
-                                
-                                <h3 class="font-bold">Estado de residencia: {{$usuarioAlumno->estatus_residencia}}</h3>
-                                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                                    Cambiar
-                                </button>
-                                <select id="estado" name="estado" class="border rounded p-2">
-                                    <option value="En pausa">En pausa</option>
-                                    <option value="Finalizado">Finalizado</option>
-                                    <option value="Cancelado">Cancelado</option>
-                                    <option value="En proceso">En proceso</option>
-                                </select>
-                            </form>
+                        <div class="p-4 bg-blue-200 text-blue-800 rounded space-y-2">
+                            <h3 class="font-bold w-full">Este usuario actualmente es Residente desde {{$fecha}}</h3>
+                            <h3 class="w-full">Nombre de la oferta: {{ $oferta->nombre }}</h3>
+                        
+                            <div class="w-full bg-indigo-300 rounded mt-2 mb-4 p-2 flex flex-wrap items-center gap-2">
+                                <form action="/infoAlumno/{{$usuarioAlumno->alumno_numero_control}}" method="POST">
+                                    @csrf
+                                    
+                                    <h3 class="font-bold">Estado de residencia: {{$usuarioAlumno->estatus_residencia}}</h3>
+                                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                        Cambiar
+                                    </button>
+                                    <select id="estado" name="estado" class="border rounded p-2">
+                                        <option value="En pausa">En pausa</option>
+                                        <option value="Finalizado">Finalizado</option>
+                                        <option value="Cancelado">Cancelado</option>
+                                        <option value="En proceso">En proceso</option>
+                                    </select>
+                                </form>
+                            <h3 class="w-full">Nombre de la empresa: {{ $oferta->usuarios_empleador->empleadore->razon_social }}</h3>
+                            <h3 class="w-full">Sitio web: {{ $oferta->usuarios_empleador->empleadore->sitio_web }}</h3>
+                        </div>                    
+
                         <h3 class="w-full">Nombre de la empresa: {{ $oferta->usuarios_empleador->empleadore->razon_social }}</h3>
                         <h3 class="w-full">Sitio web: {{ $oferta->usuarios_empleador->empleadore->sitio_web }}</h3>
-                    </div>                    
-
-                    <h3 class="w-full">Nombre de la empresa: {{ $oferta->usuarios_empleador->empleadore->razon_social }}</h3>
-                    <h3 class="w-full">Sitio web: {{ $oferta->usuarios_empleador->empleadore->sitio_web }}</h3>
-                </div>                
+                    </div>                
+                    @endif
                 @endif
             </div>
     </div>

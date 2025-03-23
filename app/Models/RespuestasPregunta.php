@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $idrespuestas_preguntas
  * @property int $preguntas_idpreguntas
  * @property int $respuestas_idrespuestas
+ * @property int $idencuesta
  * 
  * @property Pregunta $pregunta
  * @property Respuesta $respuesta
@@ -28,12 +29,14 @@ class RespuestasPregunta extends Model
 
 	protected $casts = [
 		'preguntas_idpreguntas' => 'int',
-		'respuestas_idrespuestas' => 'int'
+		'respuestas_idrespuestas' => 'int',
+		'idencuesta' => 'int'
 	];
 
 	protected $fillable = [
 		'preguntas_idpreguntas',
-		'respuestas_idrespuestas'
+		'respuestas_idrespuestas',
+		'idencuesta'
 	];
 
 	public function pregunta()

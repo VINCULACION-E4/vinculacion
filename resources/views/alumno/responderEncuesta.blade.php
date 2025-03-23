@@ -10,7 +10,7 @@
 
     <form action="/dashboard/encuestas-respuesta{id}" method="POST" class="space-y-6">
         @csrf
-
+        <input type="hidden" name="idEncuesta" value="{{$encuesta->idencuesta}}">
         @foreach ($preguntasAsignadas as $asignacion) 
             <div class="border-b pb-4">
                 <label class="block text-lg font-medium text-gray-800">

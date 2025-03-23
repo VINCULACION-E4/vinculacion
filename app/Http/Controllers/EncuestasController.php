@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Encuesta;
 use App\Models\Pregunta;
 use App\Models\PreguntasEncuesta;
+use App\Models\RespuestasPregunta;
 
 class EncuestasController extends Controller
 {
@@ -55,9 +56,9 @@ class EncuestasController extends Controller
                 }
             }
 
-            return redirect()->route('encuestas.editor')->with('success', 'Encuesta creada correctamente.');
+            return redirect()->route('encuestas.editor',$encuesta)->with('success', 'Encuesta creada correctamente.');
         }
-
+        
     }
 
     public function actualizar(Request $request, $id){
@@ -103,12 +104,20 @@ class EncuestasController extends Controller
 
     public function preguntas(){
         $bancoPreguntas = Pregunta::all();
-        return view('encuestas.editor' , compact('bancoPreguntas'));
+        $encuesta = null;
+        return view('encuestas.editor' , compact('bancoPreguntas','encuesta'));
     }
 
     public function show($id){
         $encuesta = Encuesta::find($id);
         $preguntas = preguntasEncuesta::where('encuestas_idencuesta', $id)->get();
         return view('encuestas.show' , compact('encuesta', 'preguntas'));
+    }
+
+    public function mostrarResultados($id){
+        $encuesta = Encuesta::find($id);
+        $preguntas = preguntasEncuesta::where('encuestas_idencuesta', $id)->get();
+        $asRespuestas = RespuestasPregunta::where('idencuesta', $id)->get();
+        return view('encuestas.mostrarResultados' , compact('encuesta', 'preguntas', 'asRespuestas'));
     }
 }
