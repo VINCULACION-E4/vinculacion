@@ -127,4 +127,11 @@ class UsuarioEmpleadorController extends Controller
 
         return view('usuariosEmpleadores.trabajo', compact('oferta', 'asignaciones'));
     }
+    public function eliminarTrabajo(Request $request)
+    {
+        $idEliminada = $request->input('idEliminada');
+        AsignacionTrabajo::where('ofertas_trabajo_idoferta', $idEliminada)->delete();
+        OfertasTrabajo::destroy($idEliminada);
+        return view('layouts.homeVinculacion');
+    }
 }

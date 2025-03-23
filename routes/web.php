@@ -24,6 +24,7 @@ Route::get('/infoEmpleador/{id}', [UsuarioEmpleadorController::class, 'mostrarIn
 Route::get('/infoResidencia/{id}', [UsuarioEmpleadorController::class, 'mostrarResidencia']);
 Route::post('/infoResidencia/{id}', [UsuarioEmpleadorController::class, 'eliminarResidencia']);
 Route::get('/infoTrabajo/{id}', [UsuarioEmpleadorController::class, 'mostrarTrabajo']);
+Route::post('/infoTrabajo/{id}', [UsuarioEmpleadorController::class, 'eliminarTrabajo']);
 Route::get('/crearEmpleador', [UsuarioEmpleadorController::class, 'formulario']);
 Route::post('/crearEmpleador', [UsuarioEmpleadorController::class, 'nuevoEmpleador'])->name('usuariosEmpleador.nuevo');
 //Encuestas
