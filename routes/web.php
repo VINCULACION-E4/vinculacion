@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsuarioAlumnoController;
 use App\Http\Controllers\UsuarioEmpleadorController;
+use App\Http\Controllers\EncuestasController;
 
 use App\Http\Controllers\TestController;
 
@@ -11,15 +12,27 @@ Route::get('/', function () {
 });
 
 
-
+//Alumnos
 Route::get('/mostrarAlumnos', [UsuarioAlumnoController::class, 'index']);
 Route::get('/infoAlumno/{id}', [UsuarioAlumnoController::class, 'mostrarInfo']);
 Route::post('/infoAlumno/{id}', [UsuarioAlumnoController::class, 'actualizarAlumno']);
-
-
+//Empleadores
 Route::get('/mostrarEmpleadores', [UsuarioEmpleadorController::class, 'index']);
 Route::get('/infoEmpleador/{id}', [UsuarioEmpleadorController::class, 'mostrarInfo']);
 Route::get('/infoResidencia/{id}', [UsuarioEmpleadorController::class, 'mostrarResidencia']);
 Route::get('/infoTrabajo/{id}', [UsuarioEmpleadorController::class, 'mostrarTrabajo']);
+//Encuestas
+Route::get('/menuEncuestas', [EncuestasController::class, 'index']); //mostrar todas las encuestas
+Route::post('/editorEncuesta', [EncuestasController::class, 'create']);//crear nueva encuesta
+Route::get('/editorEncuesta', [EncuestasController::class, 'preguntas'])->name('encuestas.editor'); //abrir editor de encuesta sin reenviar datos
+Route::get('/editorEncuesta/{id}', [EncuestasController::class, 'editar'])->name('encuestas.editor'); //editor para actualizar encuesta
+Route::post('/editorEncuesta/{id}', [EncuestasController::class, 'actualizar']); //actualizar encuesta
+//Route::get('/mostrarEncuesta/{id}', [EncuestasController::class, 'show']);
+/*
+Route::get('/editorEncuesta', function () {
+    return view('encuestas.editor');
+})->name('encuestas.editor');
+*/
 
+//Test
 Route::get('/update', [TestController::class, 'update']);
