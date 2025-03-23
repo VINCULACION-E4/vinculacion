@@ -47,10 +47,11 @@ class Empleadore extends Model
 
 	protected $casts = [
 		'numero_empleados' => 'int',
-		'carreras_de_interes' => 'USER-DEFINED'
+		'carreras_de_interes' => 'string'
 	];
 
 	protected $fillable = [
+		'rfc',
 		'logo_url',
 		'nombre_comercial',
 		'razon_social',

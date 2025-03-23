@@ -27,6 +27,12 @@
     <div class="container mx-auto px-4">
         <!-- Grid con 3 columnas -->
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            <a href="/crearEmpleador" class="flex justify-center items-center bg-white shadow-md rounded-lg overflow-hidden border border-dashed border-gray-400 hover:bg-gray-100 transition">
+                <div class="flex flex-col items-center p-10">
+                    <span class="text-4xl text-gray-400">+</span>
+                    <p class="text-gray-500 mt-2">Agregar Empresa</p>
+                </div>
+            </a>
             @foreach($empleadores as $empleador)
                 <div class="bg-white shadow-md rounded-lg overflow-hidden">
                     <h5 class="text-xl font-semibold text-center text-gray-400">{{$empleador->empleadore->sector}}</h5>
@@ -44,6 +50,7 @@
                     </div>
                 </div>
             @endforeach
+            
         </div>
     </div>
 @endsection

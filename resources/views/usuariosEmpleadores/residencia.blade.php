@@ -28,6 +28,16 @@
               <p class="text-center font-bold text-gray-500 sm:text-left"> Salario: ${{ $oferta->salario}} mxn</p>
               <p class="text-center font-bold text-gray-500 sm:text-left"> Area: {{ $oferta->area_residencia}}</p><br>
               <p class="text-center text-gray-500 sm:text-left"> Para {{ $oferta->carrera_solicitada}}</p>
+              <br>
+              <div class="flex items-center justify-center">
+                <form action = '/infoResidencia/{{ $oferta->idoferta}}' method="POST">
+                  @csrf
+                    <input type="hidden" name="idEliminada" value="{{ $oferta->idoferta}}">
+                    <button type="submit" class='bg-red-300 rounded w-35 h-10 hover:bg-red-400 font-bold text-white p-auto'>
+                      Rechazar oferta
+                    </button>
+                <form>
+              </div>
         </div>
       </div>
     </div>

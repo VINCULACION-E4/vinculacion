@@ -71,7 +71,7 @@
                             {{ $Residencia->vacantes_disponibles }} vacantes disponibles
                         </div>
                         <p class="leading-relaxed text-base">{{ $Residencia->descripcion }}</p>
-                        <a href="{{ url('/infoResidencia/' . $Residencia->idoferta) }}" class="text-indigo-500 inline-flex items-center">Mostrar más
+                        <a href="{{ url('/infoResidencia/' . $Residencia->idoferta) }}" class="text-indigo-500 inline-flex items-center">Mostrar más / rechazar
                             <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
                               <path d="M5 12h14"></path>
                               <path d="M12 5l7 7-7 7"></path>
@@ -102,7 +102,7 @@
                             {{ $Trabajo->vacantes_disponibles }} vacantes disponibles
                         </div>
                         <p class="leading-relaxed text-base">{{ $Trabajo->descripcion }}</p>
-                        <a href="{{ url('/infoTrabajo/' . $Trabajo->idoferta) }}"class="text-indigo-500 inline-flex items-center">Mostrar más
+                        <a href="{{ url('/infoTrabajo/' . $Trabajo->idoferta) }}"class="text-indigo-500 inline-flex items-center">Mostrar más / rechazar
                             <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
                               <path d="M5 12h14"></path>
                               <path d="M12 5l7 7-7 7"></path>
