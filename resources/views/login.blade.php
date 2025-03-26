@@ -53,7 +53,7 @@
             display: block;
             width: 100%;
             padding: 10px;
-            margin: 10px 0;
+            margin: 10px -10px;
             border: 1px solid #ccc;
             border-radius: 5px;
         }
