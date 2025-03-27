@@ -21,7 +21,10 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $area_residencia
  * @property string|null $carrera_solicitada
  * @property int $usuarios_empleador_idusuarios_empleador
+<<<<<<< HEAD
  * @property USER-DEFINED|null $estado
+=======
+>>>>>>> origin/ADOLFO
  * 
  * @property UsuariosEmpleador $usuarios_empleador
  * @property Collection|AsignacionResidencium[] $asignacion_residencia
@@ -37,8 +40,12 @@ class OfertasResidencium extends Model
 	protected $casts = [
 		'vacantes_disponibles' => 'int',
 		'salario' => 'float',
+<<<<<<< HEAD
 		'usuarios_empleador_idusuarios_empleador' => 'int',
 		'estado' => 'USER-DEFINED'
+=======
+		'usuarios_empleador_idusuarios_empleador' => 'int'
+>>>>>>> origin/ADOLFO
 	];
 
 	protected $fillable = [
@@ -49,8 +56,13 @@ class OfertasResidencium extends Model
 		'salario',
 		'area_residencia',
 		'carrera_solicitada',
+<<<<<<< HEAD
 		'usuarios_empleador_idusuarios_empleador',
 		'estado'
+=======
+		'estado',
+		'usuarios_empleador_idusuarios_empleador'
+>>>>>>> origin/ADOLFO
 	];
 
 	public function usuarios_empleador()

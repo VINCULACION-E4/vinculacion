@@ -40,7 +40,10 @@ class Alumno extends Model
 	];
 
 	protected $fillable = [
+<<<<<<< HEAD
 		'numero_control', 
+=======
+>>>>>>> origin/ADOLFO
 		'nombre',
 		'apellido_paterno',
 		'apellido_materno',

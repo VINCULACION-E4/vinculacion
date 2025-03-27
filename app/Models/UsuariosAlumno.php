@@ -7,6 +7,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Collection;
+<<<<<<< HEAD
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -14,15 +15,43 @@ class UsuariosAlumno extends Authenticatable
 {
     use Notifiable;
 
+=======
+use Illuminate\Database\Eloquent\Model;
+
+/**
+ * Class UsuariosAlumno
+ * 
+ * @property int $idusuarios_alumno
+ * @property string $alumno_numero_control
+ * @property USER-DEFINED|null $estatus_residencia
+ * @property string|null $nombre_usuario
+ * @property string|null $password
+ * @property USER-DEFINED|null $estatus_estudiante
+ * 
+ * @property Alumno $alumno
+ * @property Collection|AsignacionTrabajo[] $asignacion_trabajos
+ * @property Collection|AsignacionResidencium[] $asignacion_residencia
+ *
+ * @package App\Models
+ */
+class UsuariosAlumno extends Model
+{
+>>>>>>> origin/ADOLFO
 	protected $table = 'usuarios_alumno';
 	protected $primaryKey = 'idusuarios_alumno';
 	public $timestamps = false;
 
 	protected $casts = [
+<<<<<<< HEAD
 		'estatus_residencia' => 'string',
 		'estatus_estudiante' => 'string'
 	];
 	
+=======
+		'estatus_residencia' => 'USER-DEFINED',
+		'estatus_estudiante' => 'USER-DEFINED'
+	];
+>>>>>>> origin/ADOLFO
 
 	protected $hidden = [
 		'password'

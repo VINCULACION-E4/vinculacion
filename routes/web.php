@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+<<<<<<< HEAD
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 
@@ -27,3 +28,14 @@ Route::get('/dashboard/empleador', function () {
 Route::get('/dashboard/vinculacion', function () {
     return view('dashboard.vinculacion');
 })->middleware('auth:vinculacion');
+=======
+use App\Http\Controllers\VinculacionController;
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/vinculacion_ofertas', [VinculacionController::class, 'index'])->name('vinculacion.index');
+Route::get('/vinculacion/cambiarEstadoResidencia/{id}/{estado}', [VinculacionController::class, 'cambiarEstadoResidencia'])->name('vinculacion.cambiarEstadoResidencia');
+Route::get('/vinculacion/cambiarEstadoTrabajo/{id}/{estado}', [VinculacionController::class, 'cambiarEstadoTrabajo'])->name('vinculacion.cambiarEstadoTrabajo');
+>>>>>>> origin/ADOLFO
