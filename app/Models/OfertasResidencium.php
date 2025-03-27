@@ -22,9 +22,12 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $carrera_solicitada
  * @property int $usuarios_empleador_idusuarios_empleador
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @property USER-DEFINED|null $estado
 =======
 >>>>>>> origin/ADOLFO
+=======
+>>>>>>> origin/CRIS
  * 
  * @property UsuariosEmpleador $usuarios_empleador
  * @property Collection|AsignacionResidencium[] $asignacion_residencia
@@ -41,11 +44,15 @@ class OfertasResidencium extends Model
 		'vacantes_disponibles' => 'int',
 		'salario' => 'float',
 <<<<<<< HEAD
+<<<<<<< HEAD
 		'usuarios_empleador_idusuarios_empleador' => 'int',
 		'estado' => 'USER-DEFINED'
 =======
 		'usuarios_empleador_idusuarios_empleador' => 'int'
 >>>>>>> origin/ADOLFO
+=======
+		'usuarios_empleador_idusuarios_empleador' => 'int'
+>>>>>>> origin/CRIS
 	];
 
 	protected $fillable = [
@@ -57,12 +64,16 @@ class OfertasResidencium extends Model
 		'area_residencia',
 		'carrera_solicitada',
 <<<<<<< HEAD
+<<<<<<< HEAD
 		'usuarios_empleador_idusuarios_empleador',
 		'estado'
 =======
 		'estado',
 		'usuarios_empleador_idusuarios_empleador'
 >>>>>>> origin/ADOLFO
+=======
+		'usuarios_empleador_idusuarios_empleador'
+>>>>>>> origin/CRIS
 	];
 
 	public function usuarios_empleador()

@@ -8,6 +8,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Collection;
 <<<<<<< HEAD
+<<<<<<< HEAD
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -16,6 +17,8 @@ class UsuariosAlumno extends Authenticatable
     use Notifiable;
 
 =======
+=======
+>>>>>>> origin/CRIS
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -36,12 +39,16 @@ use Illuminate\Database\Eloquent\Model;
  */
 class UsuariosAlumno extends Model
 {
+<<<<<<< HEAD
 >>>>>>> origin/ADOLFO
+=======
+>>>>>>> origin/CRIS
 	protected $table = 'usuarios_alumno';
 	protected $primaryKey = 'idusuarios_alumno';
 	public $timestamps = false;
 
 	protected $casts = [
+<<<<<<< HEAD
 <<<<<<< HEAD
 		'estatus_residencia' => 'string',
 		'estatus_estudiante' => 'string'
@@ -52,6 +59,11 @@ class UsuariosAlumno extends Model
 		'estatus_estudiante' => 'USER-DEFINED'
 	];
 >>>>>>> origin/ADOLFO
+=======
+		'estatus_residencia' => 'string',
+		'estatus_estudiante' => 'string'
+	];
+>>>>>>> origin/CRIS
 
 	protected $hidden = [
 		'password'

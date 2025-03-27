@@ -5,10 +5,14 @@
         "This file is @generated automatically"
     ],
 <<<<<<< HEAD
+<<<<<<< HEAD
     "content-hash": "2b70077398dafcae615cbf75d9d5208b",
 =======
     "content-hash": "20b1d239c1566c27a8d289eff12d48d4",
 >>>>>>> origin/ADOLFO
+=======
+    "content-hash": "20b1d239c1566c27a8d289eff12d48d4",
+>>>>>>> origin/CRIS
     "packages": [
         {
             "name": "brick/math",
