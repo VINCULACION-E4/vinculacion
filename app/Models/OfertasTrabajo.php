@@ -21,13 +21,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $area_trabajo
  * @property string|null $carrera_solicitada
  * @property int $usuarios_empleador_idusuarios_empleador
-<<<<<<< HEAD
-<<<<<<< HEAD
+
  * @property USER-DEFINED|null $estado
-=======
->>>>>>> origin/ADOLFO
-=======
->>>>>>> origin/CRIS
+
  * 
  * @property UsuariosEmpleador $usuarios_empleador
  * @property Collection|AsignacionTrabajo[] $asignacion_trabajos
@@ -43,16 +39,9 @@ class OfertasTrabajo extends Model
 	protected $casts = [
 		'vacantes_disponibles' => 'int',
 		'salario' => 'float',
-<<<<<<< HEAD
-<<<<<<< HEAD
 		'usuarios_empleador_idusuarios_empleador' => 'int',
-		'estado' => 'USER-DEFINED'
-=======
+		'estado' => 'string',
 		'usuarios_empleador_idusuarios_empleador' => 'int'
->>>>>>> origin/ADOLFO
-=======
-		'usuarios_empleador_idusuarios_empleador' => 'int'
->>>>>>> origin/CRIS
 	];
 
 	protected $fillable = [
@@ -63,17 +52,9 @@ class OfertasTrabajo extends Model
 		'salario',
 		'area_trabajo',
 		'carrera_solicitada',
-<<<<<<< HEAD
-<<<<<<< HEAD
 		'usuarios_empleador_idusuarios_empleador',
-		'estado'
-=======
 		'estado',
 		'usuarios_empleador_idusuarios_empleador'
->>>>>>> origin/ADOLFO
-=======
-		'usuarios_empleador_idusuarios_empleador'
->>>>>>> origin/CRIS
 	];
 
 	public function usuarios_empleador()

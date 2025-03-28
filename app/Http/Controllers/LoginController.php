@@ -33,6 +33,7 @@ class LoginController extends Controller
         } elseif ($tipo === 'vinculacion') {
             $credentials['nombre'] = $request->identificador;
             $user = UsuariosVinculacion::where('nombre', $credentials['nombre'])->first();
+            return redirect('/mostrarAlumnos');
         } else {
             Log::error('Tipo de usuario inválido', ['tipo' => $tipo]);
             return back()->withErrors(['tipo' => 'Tipo de usuario inválido.']);
@@ -61,7 +62,7 @@ class LoginController extends Controller
         } elseif ($tipo === 'empleador') {
             return redirect('/dashboard/empleador');
         } elseif ($tipo === 'vinculacion') {
-            return redirect('/dashboard/vinculacion');
+            return redirect('/mostrarAlumnos');
         }
     }
 

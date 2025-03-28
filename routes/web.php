@@ -1,8 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 
@@ -19,7 +18,7 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 // Vistas después del login
 Route::get('/dashboard/alumno', function () {
-    return view('dashboard.alumno');
+    return view('');
 })->middleware('auth:alumno');
 
 Route::get('/dashboard/empleador', function () {
@@ -27,29 +26,28 @@ Route::get('/dashboard/empleador', function () {
 })->middleware('auth:empleador');
 
 Route::get('/dashboard/vinculacion', function () {
-    return view('dashboard.vinculacion');
+    return view('usuariosAlumnos.index');
 })->middleware('auth:vinculacion');
-=======
+
 use App\Http\Controllers\VinculacionController;
-=======
+
 use App\Http\Controllers\UsuarioAlumnoController;
 use App\Http\Controllers\UsuarioEmpleadorController;
 use App\Http\Controllers\EncuestasController;
 
 use App\Http\Controllers\AlumnoController;
 use App\Http\Controllers\TestController;
->>>>>>> origin/CRIS
+
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('login');
 });
 
-<<<<<<< HEAD
+
 Route::get('/vinculacion_ofertas', [VinculacionController::class, 'index'])->name('vinculacion.index');
 Route::get('/vinculacion/cambiarEstadoResidencia/{id}/{estado}', [VinculacionController::class, 'cambiarEstadoResidencia'])->name('vinculacion.cambiarEstadoResidencia');
 Route::get('/vinculacion/cambiarEstadoTrabajo/{id}/{estado}', [VinculacionController::class, 'cambiarEstadoTrabajo'])->name('vinculacion.cambiarEstadoTrabajo');
->>>>>>> origin/ADOLFO
-=======
+
 
 
 //mostrarAlumnos
@@ -85,4 +83,4 @@ Route::get('/editorEncuesta', function () {
 
 //Test
 Route::get('/update', [TestController::class, 'update']);
->>>>>>> origin/CRIS
+
