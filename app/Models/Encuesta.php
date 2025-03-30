@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $titulo
  * @property string|null $descripcion
  * @property int $usuario_cordinacion_idusuario_cordinacion
+ * @property string $nombre_carrera
  * 
  * @property UsuariosVinculacion $usuarios_vinculacion
  * @property Collection|EncuestaRealizada[] $encuesta_realizadas
@@ -36,7 +37,8 @@ class Encuesta extends Model
 	protected $fillable = [
 		'titulo',
 		'descripcion',
-		'usuario_cordinacion_idusuario_cordinacion'
+		'usuario_cordinacion_idusuario_cordinacion',
+		'nombre_carrera'
 	];
 
 	public function usuarios_vinculacion()

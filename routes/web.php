@@ -16,7 +16,7 @@ Route::post('/login', [LoginController::class, 'login'])->name('login.perform');
 // Ruta para cerrar sesión
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-// Vistas después del login
+/*
 Route::get('/dashboard/alumno', function () {
     return view('');
 })->middleware('auth:alumno');
@@ -28,6 +28,7 @@ Route::get('/dashboard/empleador', function () {
 Route::get('/dashboard/vinculacion', function () {
     return view('usuariosAlumnos.index');
 })->middleware('auth:vinculacion');
+*/
 
 use App\Http\Controllers\VinculacionController;
 
@@ -52,6 +53,7 @@ Route::get('/vinculacion/cambiarEstadoTrabajo/{id}/{estado}', [VinculacionContro
 
 //mostrarAlumnos
 Route::get('/mostrarAlumnos', [UsuarioAlumnoController::class, 'index']);
+Route::post('/mostrarAlumnos', [UsuarioAlumnoController::class, 'index']);
 Route::get('/infoAlumno/{id}', [UsuarioAlumnoController::class, 'mostrarInfo']);
 Route::post('/infoAlumno/{id}', [UsuarioAlumnoController::class, 'actualizarAlumno']);
 //Empleadores
@@ -72,6 +74,7 @@ Route::post('/editorEncuesta/{id}', [EncuestasController::class, 'actualizar']);
 Route::get('/resultadosEncuesta/{id}', [EncuestasController::class, 'mostrarResultados']);
 //Vistas usuarioAlumno
 Route::get('/dashboard/encuestas',[AlumnoController::class, 'mostrarEncuestas']);
+Route::post('/dashboard/encuestas',[AlumnoController::class, 'mostrarEncuestas']);
 Route::get('/dashboard/encuestas-respuesta{id}',[AlumnoController::class, 'responder']);
 Route::post('/dashboard/encuestas-respuesta{id}',[AlumnoController::class, 'mandarRespuesta'])->name ('alumno.dashboard'); 
 //Route::get('/mostrarEncuesta/{id}', [EncuestasController::class, 'show']);

@@ -35,7 +35,7 @@
                     <h2 class="text-lg text-gray-700 font-semibold">{{ $encuesta->titulo }}</h2>
                     <p class="text-gray-500 mt-2">{{ $encuesta->descripcion }}</p>
                     <div class="mt-4 flex justify-between w-full">
-                        <a href="/editorEncuesta/{{ $encuesta->idencuesta }}" class="text-blue-500">Ver encuesta</a>
+                        <a href="/editorEncuesta/{{ $encuesta->idencuesta }}" class="text-blue-500">Ver/editar encuesta</a>
                         <a href="/resultadosEncuesta/{{ $encuesta->idencuesta }}" class="text-blue-500 text-purple-600">Reporte de resultados</a>
                     </div>
                 </div>

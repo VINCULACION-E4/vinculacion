@@ -43,6 +43,4 @@ class VinculacionController extends Controller
         }
         return redirect()->route('vinculacion.index')->with('error', 'Oferta no encontrada.');
     }
-    
-
 }

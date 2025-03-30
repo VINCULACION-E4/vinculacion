@@ -5,12 +5,21 @@
         <form action="/editorEncuesta" method="POST" class="bg-white p-6 rounded-lg shadow-md w-160">
             @csrf
             <h2 class="text-xl font-bold mb-4 text-center">Crear Encuesta</h2>
-            
+            <input type="hidden" name="creador" value="{{ $authUser->idusuario_vinculacion }}">
             <label for="nombre" class="block text-gray-700 font-medium">Nombre de la Encuesta:</label>
             <input type="text" id="nombre" name="titulo" required class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4">
             
             <label for="descripcion" class="block text-gray-700 font-medium">Descripción:</label>
             <textarea id="descripcion" name="descripcion" rows="4" required class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4"></textarea>
+            <div class="flex items-center gap-4 bg-gray-100 p-3 rounded-lg shadow">
+                <h3 class="text-lg font-semibold text-gray-700">Carrera dirigida:</h3>
+                <select id="options" name="carrera" class="px-4 py-2 rounded-md border border-gray-300 bg-white shadow-sm focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 text-gray-700">
+                    <option value="Todas">Todas</option>
+                    @foreach ($carreras as $carrera)
+                        <option value="{{ $carrera->nombre }}">{{ $carrera->nombre }}</option>
+                    @endforeach
+                </select>
+            </div>            
             <h3 class="text-xl font-bold mb-4 text-center">Selecciona una pregunta del banco de preguntas o crea una nueva preguta</h3>
             <select id="options" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                 onchange="cargarPregunta(this.value)">
@@ -31,12 +40,21 @@
         <form action="/editorEncuesta/{{ $encuesta->idencuesta }}" method="POST" class="bg-white p-6 rounded-lg shadow-md w-160">
             @csrf
             <h2 class="text-xl font-bold mb-4 text-center">Editar Encuesta</h2>
-            
+            <label for="nombre" class="block text-gray-700 font-medium">Encuesta creada por: {{ $encuesta->usuarios_vinculacion->nombre }} {{ $encuesta->usuarios_vinculacion->apellido_paterno }}</label>
+            <input type="hidden" name="idEmpleado" value="{{ $authUser->idusuario_vinculacion }}">
             <label for="nombre" class="block text-gray-700 font-medium">Nombre de la Encuesta:</label>
             <input type="text" id="nombre" name="titulo" required class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4 " value="{{ $encuesta->titulo }}">
-            
             <label for="descripcion" class="block text-gray-700 font-medium">Descripción:</label>
             <textarea id="descripcion" name="descripcion" rows="4" required class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4 ">{{ $encuesta->descripcion }}</textarea>
+            <div class="flex items-center gap-4 bg-gray-100 p-3 rounded-lg shadow">
+                <h3 class="text-lg font-semibold text-gray-700">Carrera dirigida:</h3>
+                <select id="options" name="carrera" class="px-4 py-2 rounded-md border border-gray-300 bg-white shadow-sm focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 text-gray-700">
+                    <option value="Todas">Todas</option>
+                    @foreach ($carreras as $carrera)
+                        <option value="{{ $carrera->nombre }}">{{ $carrera->nombre }}</option>
+                    @endforeach
+                </select>
+            </div> 
             <h3 class="text-xl font-bold mb-4 text-center">Selecciona una pregunta del banco de preguntas o crea una nueva preguta</h3>
             <select id="options" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                 onchange="cargarPregunta(this.value)">

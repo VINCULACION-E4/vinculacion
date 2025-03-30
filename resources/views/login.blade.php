@@ -68,7 +68,10 @@
 <img src="/resources/morelia.png" alt="Logo Morelia" class="logo-derecha">
 
     <div class="container">
+        
+        
         <h2>Selecciona tu tipo de usuario</h2>
+        
         <button onclick="showForm('alumno')">Alumno</button>
         <button onclick="showForm('empleador')">Empleador</button>
         <button onclick="showForm('vinculacion')">Vinculación</button>
@@ -88,7 +91,8 @@
             document.getElementById('identificador').placeholder = 
                 tipo === 'alumno' ? 'Número de Control' : 
                 tipo === 'empleador' ? 'RFC' : 
-                'Nombre';
+                tipo === 'vinculacion' ? 'Usuario' : '';
+
         }
     </script>
 </body>

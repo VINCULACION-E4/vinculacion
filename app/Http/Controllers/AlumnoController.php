@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 use App\Models\Encuesta;
 use App\Models\PreguntasEncuesta;
 use App\Models\Pregunta;
@@ -13,6 +15,8 @@ class AlumnoController extends Controller
 {
     public function mostrarEncuestas(){
         $encuestas = Encuesta::all();
+        $userAl = Auth::guard('usuarios_alumno')->user();
+        
         return view('alumno.encuestas', compact('encuestas'));
     }
 

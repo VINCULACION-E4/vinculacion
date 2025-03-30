@@ -10,6 +10,8 @@ use App\Models\OfertasResidencium;
 use App\Models\UsuariosAlumno;
 use App\Models\Alumno;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 
 class UsuarioAlumnoController extends Controller
@@ -25,7 +27,10 @@ class UsuarioAlumnoController extends Controller
                                       ->orWhere('apellido_materno', 'like', '%' . $search . '%');
                             })
                             ->get();
-        return view('usuariosAlumnos.index', compact('usuariosAlumnos'));
+             
+    $userVin = Auth::guard('vinculacion')->user();
+    //return $userVin->nombre_usuario;            
+    return view('usuariosAlumnos.index', compact('usuariosAlumnos'));
     }
 
     public function mostrarInfo($id)

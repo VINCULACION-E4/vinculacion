@@ -7,6 +7,7 @@ use App\Models\Encuesta;
 use App\Models\Pregunta;
 use App\Models\PreguntasEncuesta;
 use App\Models\RespuestasPregunta;
+use App\Models\Carrera;
 
 class EncuestasController extends Controller
 {
@@ -28,15 +29,19 @@ class EncuestasController extends Controller
             $data = $request->validate([
                 'titulo' => 'required|string|max:255|unique:encuestas,titulo',
                 'descripcion' => 'required|string|max:1000',
+                'carrera' => 'required|string'
             ]);
             $encuesta = Encuesta::create([
                 'titulo' => $data['titulo'],
                 'descripcion' => $data['descripcion'],
-                'usuario_cordinacion_idusuario_cordinacion' => 1,
+                'usuario_cordinacion_idusuario_cordinacion' =>  $data['idEmpleado'],
+                'carrera' => $data['carrera'],
             ]);
             $idEncuesta = $encuesta->idencuesta;
-
+            
+            
             $nuevasPreguntas = $request->input('preguntas');
+            if($nuevasPreguntas != null){
             foreach ($nuevasPreguntas as $nuevapregunta) {
                 $preguntaExistente = Pregunta::where('texto', $nuevapregunta)->first();
                 if ($preguntaExistente) {
@@ -56,23 +61,28 @@ class EncuestasController extends Controller
                 }
             }
 
-            return redirect()->route('encuestas.editor',$encuesta)->with('success', 'Encuesta creada correctamente.');
+            }
+            return view ('layouts.homeVinculacion');
         }
-        
     }
 
     public function actualizar(Request $request, $id){
         $nuevoTitulo = $request->input('titulo');
         $nuevaDescripcion = $request->input('descripcion');
+        $nuevaCarrera = $request->input('carrera');
+        $modificador = $request->input('idEmpleado');
 
         $encuesta = Encuesta::find($id);
         $encuesta->titulo = $nuevoTitulo;
         $encuesta->descripcion = $nuevaDescripcion;
+        $encuesta->nombre_carrera = $nuevaCarrera;
+        $encuesta->usuario_cordinacion_idusuario_cordinacion= $modificador;
         $encuesta->save();
         //borrar todas las preguntas asignadas
         preguntasEncuesta::where('encuestas_idencuesta', $id)->delete();
         //reasignar las preguntas
         $nuevasPreguntas = $request->input('preguntas');
+        if($nuevasPreguntas != null){
         foreach ($nuevasPreguntas as $nuevapregunta) {
             $preguntaExistente = Pregunta::where('texto', $nuevapregunta)->first();
             if ($preguntaExistente) {
@@ -91,21 +101,24 @@ class EncuestasController extends Controller
                 $nuevaAsignacion->save();
             }
         }
+        }
         $cambioExitoso = true;
-        return redirect()->route('encuestas.editor', $id)->with('success', 'Encuesta actualizada correctamente.');
+        return view ('layouts.homeVinculacion');
     }
 
     public function editar($id){
+        $carreras = Carrera::all();
         $bancoPreguntas = Pregunta::all();
         $encuesta = Encuesta::find($id);
         $preguntasAsignadas = preguntasEncuesta::where('encuestas_idencuesta', $id)->get();
-        return view('encuestas.editor' , compact('encuesta', 'bancoPreguntas', 'preguntasAsignadas'));
+        return view('encuestas.editor' , compact('encuesta', 'bancoPreguntas', 'preguntasAsignadas','carreras'));
     }
 
     public function preguntas(){
+        $carreras = Carrera::all();
         $bancoPreguntas = Pregunta::all();
         $encuesta = null;
-        return view('encuestas.editor' , compact('bancoPreguntas','encuesta'));
+        return view('encuestas.editor' , compact('bancoPreguntas','encuesta', 'carreras'));
     }
 
     public function show($id){

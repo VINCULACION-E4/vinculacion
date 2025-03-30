@@ -16,10 +16,10 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
-        'alumno' => [
-            'driver' => 'session',
-            'provider' => 'alumnos',
-        ],
+        'usuarios_alumno' => [
+                'driver' => 'session',
+                'provider' => 'usuarios_alumno',
+            ],
         'empleador' => [
             'driver' => 'session',
             'provider' => 'empleadores',
@@ -37,9 +37,9 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\UsuariosAlumno::class,
         ],
-        'alumnos' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\UsuariosAlumno::class,
+        'usuarios_alumno' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\UsuariosAlumno::class,
         ],
         'empleadores' => [
             'driver' => 'eloquent',
