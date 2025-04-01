@@ -39,7 +39,7 @@
                             <div class="w-120 h-0.5 bg-indigo-300 rounded mt-2 mb-4"></div>
                         <span class="text-blue-500 font-bold">Semestre en curso:</span> {{ $alumno->semestre_actual}} <br>
                             <div class="w-60 h-0.5 bg-indigo-300 rounded mt-2 mb-5"></div>
-                        <span class="text-blue-500 font-bold">Numero de control:</span> {{ $alumno->numero_control}} <br>
+                        <span class="text-blue-500 font-bold">Número de control:</span> {{ $alumno->numero_control}} <br>
                             <div class="w-100 h-0.5 bg-indigo-300 rounded mt-2 mb-5"></div>
                     </p>
                     </div>
@@ -50,7 +50,7 @@
                 @if($oferta != null)
                     @if($usuarioAlumno->estatus_estudiante === 'Egresado')
                         <div class="p-4 bg-green-200 text-green-800 rounded">
-                            <h3 class="font-bold">Este usuario actualmente es Empleado desde {{$fecha}}</h3>
+                            <h3 class="font-bold">Este usuario actualmente es empleado desde {{$fecha}}</h3>
                             <h3>Nombre de la oferta : {{ $oferta->nombre }}</h3>
                             <h3>Nombre de la empresa : {{ $oferta->usuarios_empleador->empleadore->razon_social}}</h3>
                             <h3>Sitio web:   {{ $oferta->usuarios_empleador->empleadore->sitio_web}}</h3>

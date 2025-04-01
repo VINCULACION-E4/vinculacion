@@ -19,7 +19,7 @@
       <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
         <a href="/mostrarAlumnos" class="mr-5 hover:text-gray-900">Usuarios  |</a>
         <a href="/menuEncuestas" class="mr-5 hover:text-gray-900">Encuestas  |</a>
-        <a href="/vinculacion_ofertas" class="mr-5 hover:text-gray-900">ofertas</a>
+        <a href="/vinculacion_ofertas" class="mr-5 hover:text-gray-900">Ofertas</a>
 
         @if(isset($authUser))
         <div class="relative inline-block text-left">

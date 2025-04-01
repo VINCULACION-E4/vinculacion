@@ -36,7 +36,7 @@
 
                     <div class="sm:w-2/3 sm:pl-8 sm:py-8 sm:border-l border-blue-700 sm:border-t-0 border-t mt-4 pt-4 sm:mt-0 text-center sm:text-left">
                     <p class="leading-relaxed text-lg mb-4">
-                        <span class="text-blue-500 font-bold">Razon social:</span>  {{ $empleador->razon_social}}  <br>
+                        <span class="text-blue-500 font-bold">Razón social:</span>  {{ $empleador->razon_social}}  <br>
                             <div class="w-100 h-0.5 bg-indigo-300 rounded mt-2 mb-4"></div>
                         <span class="text-blue-500 font-bold">Tipo de empresa:</span> {{ $empleador->tipo_de_empresa}}  <br>
                             <div class="w-60 h-0.5 bg-indigo-300 rounded mt-2 mb-5"></div>
@@ -44,9 +44,9 @@
                             <div class="w-75 h-0.5 bg-indigo-300 rounded mt-2 mb-5"></div>
                         <span class="text-blue-500 font-bold">Giro:</span>  {{ $empleador->giro}}<br>
                             <div class="w-100 h-0.5 bg-indigo-300 rounded mt-2 mb-5"></div>
-                        <span class="text-blue-500 font-bold">Num. empeados:</span>  {{ $empleador->numero_empleados}}<br>
+                        <span class="text-blue-500 font-bold">Número de empeados:</span>  {{ $empleador->numero_empleados}}<br>
                             <div class="w-50 h-0.5 bg-indigo-300 rounded mt-2 mb-5"></div>
-                        <span class="text-blue-500 font-bold">Direccion empresa:</span>  {{ $empleador->direccion_empresa}}, {{ $empleador->colonia}} {{ $empleador->codigo_postal}}, {{ $empleador->ciudad}}, {{ $empleador->estado}} {{ $empleador->pais}}<br>
+                        <span class="text-blue-500 font-bold">Dirección de la empresa:</span>  {{ $empleador->direccion_empresa}}, {{ $empleador->colonia}} {{ $empleador->codigo_postal}}, {{ $empleador->ciudad}}, {{ $empleador->estado}} {{ $empleador->pais}}<br>
                             <div class="w-150 h-0.5 bg-indigo-300 rounded mt-2 mb-5"></div>
                     </p>
                     </div>

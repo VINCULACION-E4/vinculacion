@@ -42,7 +42,6 @@ class Alumno extends Model
 	protected $fillable = [
 
 		'numero_control', 
-
 		'nombre',
 		'apellido_paterno',
 		'apellido_materno',

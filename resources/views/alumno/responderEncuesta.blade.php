@@ -35,4 +35,29 @@
     </form>
 </div>
 
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const form = document.querySelector("form");
+        
+        form.addEventListener("submit", function (event) {
+            let valid = true;
+            const inputs = document.querySelectorAll('input[name="respuestas[]"]');
+    
+            inputs.forEach(input => {
+                if (input.value.trim() === "") {
+                    valid = false;
+                    input.classList.add("border-red-500");
+                } else {
+                    input.classList.remove("border-red-500");
+                }
+            });
+    
+            if (!valid) {
+                event.preventDefault();
+                alert("Por favor, responde todas las preguntas antes de enviar.");
+            }
+        });
+    });
+    </script>
+    
 @endsection

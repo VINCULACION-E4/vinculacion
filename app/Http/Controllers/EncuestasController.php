@@ -26,16 +26,18 @@ class EncuestasController extends Controller
     public function create(Request $request)
     {
         if ($request->isMethod('post')) {
+            $carreraSelect = $request->input('carrera');
             $data = $request->validate([
                 'titulo' => 'required|string|max:255|unique:encuestas,titulo',
                 'descripcion' => 'required|string|max:1000',
-                'carrera' => 'required|string'
+                'carrera' => 'required|string',
+                'idEmpleado'=> 'required|integer'
             ]);
             $encuesta = Encuesta::create([
                 'titulo' => $data['titulo'],
                 'descripcion' => $data['descripcion'],
                 'usuario_cordinacion_idusuario_cordinacion' =>  $data['idEmpleado'],
-                'carrera' => $data['carrera'],
+                'nombre_carrera' => $data['carrera']
             ]);
             $idEncuesta = $encuesta->idencuesta;
             

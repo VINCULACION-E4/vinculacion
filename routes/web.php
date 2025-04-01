@@ -77,6 +77,9 @@ Route::get('/dashboard/encuestas',[AlumnoController::class, 'mostrarEncuestas'])
 Route::post('/dashboard/encuestas',[AlumnoController::class, 'mostrarEncuestas']);
 Route::get('/dashboard/encuestas-respuesta{id}',[AlumnoController::class, 'responder']);
 Route::post('/dashboard/encuestas-respuesta{id}',[AlumnoController::class, 'mandarRespuesta'])->name ('alumno.dashboard'); 
+Route::get('/ofertas',[AlumnoController::class, 'listarOfertas']);
+Route::post('/ofertas',[AlumnoController::class, 'nuevaAsignacion'])->name('alumno.listarOfertas');
+Route::post('/ofertas{id}',[AlumnoController::class, 'eliminarAsignacion'])->name('alumno.listarOfertas');
 //Route::get('/mostrarEncuesta/{id}', [EncuestasController::class, 'show']);
 /*
 Route::get('/editorEncuesta', function () {

@@ -10,7 +10,7 @@
         <div class="container mx-auto flex items-center justify-between p-4">
             <!-- Logo -->
             <a href="/" class="text-2xl font-bold">
-                Tecnologico de Morelia
+                Tecnológico de Morelia
             </a>
     
             <!-- Menú de navegación (visible en pantallas medianas y grandes) -->
