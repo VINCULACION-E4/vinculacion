@@ -61,7 +61,7 @@ class EmpresaController extends Controller
                 'vacantes_disponibles' => $data['vacantes_disponibles'],
                 'salario' => $data['salario'],
                 'area_trabajo' => $data['area_trabajo'],
-                'carrera_solicitada' => $data['carrera_solicitada'],
+                'carrera_solicitada' => $data['carrera'],
                 'usuarios_empleador_idusuarios_empleador' => $user->idusuarios_empleador,
                 'estado' => $data['Pendiente']
              ]);
