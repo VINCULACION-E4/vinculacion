@@ -29,12 +29,12 @@ class LoginController extends Controller
             $credentials['alumno_numero_control'] = $request->identificador;
             $user = UsuariosAlumno::where('alumno_numero_control', $credentials['alumno_numero_control'])->first();
         } elseif ($tipo === 'empleador') {
-            $credentials['rfc'] = $request->identificador;
-            $user = UsuariosEmpleador::where('rfc', $credentials['rfc'])->first();
+            $credentials['RFC'] = $request->identificador;
+            $user = UsuariosEmpleador::where('empleadores_rfc', $credentials['RFC'])->first();
         } elseif ($tipo === 'vinculacion') {
             $credentials['nombre_usuario'] = $request->identificador;
             $user = UsuariosVinculacion::where('nombre_usuario', $credentials['nombre_usuario'])->first();
-           
+            
         } else {
             Log::error('Tipo de usuario inválido', ['tipo' => $tipo]);
             return back()->withErrors(['tipo' => 'Tipo de usuario inválido.']);
@@ -42,43 +42,32 @@ class LoginController extends Controller
 
         if (!$user) {
             Log::error('Usuario no encontrado', ['tipo' => $tipo, 'identificador' => $request->identificador]);
+            return 'user';
             return back()->withErrors(['identificador' => 'Usuario no encontrado.']);
         }
 
         if (!Hash::check($request->password, $user->password)) {
             Log::error('Contraseña incorrecta', ['identificador' => $request->identificador]);
+            return 'pass';
             return back()->withErrors(['password' => 'Contraseña incorrecta.']);
         }
-
-        if (!$user) {
-            Log::error('Usuario no encontrado', ['tipo' => $tipo, 'identificador' => $request->identificador]);
-            return back()->withErrors(['identificador' => 'Usuario no encontrado.']);
-        }
-        if (!Hash::check($request->password, $user->password)) {
-            Log::error('Contraseña incorrecta', ['identificador' => $request->identificador]);
-            return back()->withErrors(['password' => 'Contraseña incorrecta.']);
-        }
-
+        
         if ($user) {
-            
-            
             if ($tipo === 'alumno') {
                 Auth::guard('usuarios_alumno')->login($user);
                 $request->session()->regenerate();
                 $userAl = Auth::guard('usuarios_alumno')->user();
-                //return 'saludo'. $userAl->nombre_usuario;
                 return redirect('/dashboard/encuestas');
             } elseif ($tipo === 'empleador') {
-                Auth::guard('empleador')->login($user);
-                return redirect('/dashboard/empleador');
+                Auth::guard('empleador')->login($user);   
+                $request->session()->regenerate();
+                return redirect('/dashboardEmpresa');
             } elseif ($tipo === 'vinculacion') {
                 Auth::guard('vinculacion')->login($user);
+                $request->session()->regenerate();
                 return redirect('/mostrarAlumnos');
             }
            
-            
-            
-            
             // Verifica el contenido de $authUser
             //Log::info('Usuario autenticado:', ['authUser' => $authUser]);
             //return $userVin->nombre_usuario;

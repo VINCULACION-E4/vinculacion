@@ -7,7 +7,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 /**
  * Class UsuariosEmpleador
@@ -23,14 +23,14 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @package App\Models
  */
-class UsuariosEmpleador extends Model
+class UsuariosEmpleador extends Authenticatable
 {
 	protected $table = 'usuarios_empleador';
 	protected $primaryKey = 'idusuarios_empleador';
 	public $timestamps = false;
 
 	protected $hidden = [
-		'password'
+		//'password'
 	];
 
 	protected $fillable = [

@@ -37,6 +37,7 @@ use App\Http\Controllers\UsuarioEmpleadorController;
 use App\Http\Controllers\EncuestasController;
 
 use App\Http\Controllers\AlumnoController;
+use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\TestController;
 
 
@@ -80,6 +81,16 @@ Route::post('/dashboard/encuestas-respuesta{id}',[AlumnoController::class, 'mand
 Route::get('/ofertas',[AlumnoController::class, 'listarOfertas']);
 Route::post('/ofertas',[AlumnoController::class, 'nuevaAsignacion'])->name('alumno.listarOfertas');
 Route::post('/ofertas{id}',[AlumnoController::class, 'eliminarAsignacion'])->name('alumno.listarOfertas');
+//vitas para empleadores
+Route::get('/dashboardEmpresa', [EmpresaController::class, 'index']);
+Route::get('/editor-oferta', [EmpresaController::class, 'abirEditor']);
+Route::post('/editor-oferta', [EmpresaController::class, 'create'])->name('empresa.editor');
+Route::get('/editor-oferta/residencia{id}', [EmpresaController::class, 'abirActualizarRes']);
+Route::get('/editor-oferta/trabajo{id}', [EmpresaController::class, 'abirActualizarTra']);
+Route::post('/editor-oferta/residencia{id}', [EmpresaController::class, 'actualizarDatosRes'])->name('empresa.editor');
+Route::post('/editor-oferta/trabajo{id}', [EmpresaController::class, 'actualizarDatosTra'])->name('empresa.editor');
+Route::get('/eliminarResidencia/{id}', [EmpresaController::class, 'delResidencia']);
+Route::get('/eliminarTrabajo/{id}', [EmpresaController::class, 'delTrabajo']);
 //Route::get('/mostrarEncuesta/{id}', [EncuestasController::class, 'show']);
 /*
 Route::get('/editorEncuesta', function () {
@@ -88,5 +99,5 @@ Route::get('/editorEncuesta', function () {
 */
 
 //Test
-Route::get('/update', [TestController::class, 'update']);
+//Route::get('/update', [TestController::class, 'update']);
 

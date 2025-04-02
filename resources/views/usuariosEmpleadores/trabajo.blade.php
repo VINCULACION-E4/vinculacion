@@ -27,7 +27,7 @@
               <br>
               <p class="text-center font-bold text-gray-500 sm:text-left"> Ubicación: {{ $oferta->ubicacion}}</p>
               <p class="text-center font-bold text-gray-500 sm:text-left"> Salario: ${{ $oferta->salario}} mxn</p>
-              <p class="text-center font-bold text-gray-500 sm:text-left"> Area: {{ $oferta->area_trabajo}}</p><br>
+              <p class="text-center font-bold text-gray-500 sm:text-left"> Área: {{ $oferta->area_trabajo}}</p><br>
               <p class="text-center text-gray-500 sm:text-left"> Para {{ $oferta->carrera_solicitada}}</p>
               <br>
               <div class="flex items-center justify-center">
