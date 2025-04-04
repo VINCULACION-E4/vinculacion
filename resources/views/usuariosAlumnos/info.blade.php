@@ -12,7 +12,6 @@
         <div class="text-center text-3xl font-bold text-blue-900">
             Información del alumno
         </div>
-        
             <div class="lg:w-4/6 mx-auto">
                 <div class="flex flex-col sm:flex-row mt-10">
                     <div class="sm:w-1/3 text-center sm:pr-8 sm:py-8">
@@ -41,30 +40,7 @@
                             <div class="w-60 h-0.5 bg-indigo-300 rounded mt-2 mb-5"></div>
                         <span class="text-blue-500 font-bold">Número de control:</span> {{ $alumno->numero_control}} <br>
                             <div class="w-100 h-0.5 bg-indigo-300 rounded mt-2 mb-5"></div>
-                    </p>
-                    </div>
-                </div>
-            </div>
-            <br>
-            <div class="lg:w-4/6 mx-auto">
-                @if($oferta != null)
-                    @if($usuarioAlumno->estatus_estudiante === 'Egresado')
-                        <div class="p-4 bg-green-200 text-green-800 rounded">
-                            <h3 class="font-bold">Este usuario actualmente es empleado desde {{$fecha}}</h3>
-                            <h3>Nombre de la oferta : {{ $oferta->nombre }}</h3>
-                            <h3>Nombre de la empresa : {{ $oferta->usuarios_empleador->empleadore->razon_social}}</h3>
-                            <h3>Sitio web:   {{ $oferta->usuarios_empleador->empleadore->sitio_web}}</h3>
-                        </div>
-                    <!-- Menu si es residente  --> 
-                    @elseif($usuarioAlumno->estatus_estudiante === 'Residente')
-                    <div class="p-4 bg-blue-200 text-blue-800 rounded space-y-2">
-                        <h3 class="font-bold w-full">Este usuario actualmente es Residente desde {{$fecha}}</h3>
-                        <h3 class="w-full">Nombre de la oferta: {{ $oferta->nombre }}</h3>
-                    
-                        <div class="p-4 bg-blue-200 text-blue-800 rounded space-y-2">
-                            <h3 class="font-bold w-full">Este usuario actualmente es Residente desde {{$fecha}}</h3>
-                            <h3 class="w-full">Nombre de la oferta: {{ $oferta->nombre }}</h3>
-                        
+                            @if ($usuarioAlumno->estatus_estudiante === 'Residente')
                             <div class="w-full bg-indigo-300 rounded mt-2 mb-4 p-2 flex flex-wrap items-center gap-2">
                                 <form action="/infoAlumno/{{$usuarioAlumno->alumno_numero_control}}" method="POST">
                                     @csrf
@@ -80,14 +56,47 @@
                                         <option value="En proceso">En proceso</option>
                                     </select>
                                 </form>
-                            <h3 class="w-full">Nombre de la empresa: {{ $oferta->usuarios_empleador->empleadore->razon_social }}</h3>
-                            <h3 class="w-full">Sitio web: {{ $oferta->usuarios_empleador->empleadore->sitio_web }}</h3>
-                        </div>                    
-
-                        <h3 class="w-full">Nombre de la empresa: {{ $oferta->usuarios_empleador->empleadore->razon_social }}</h3>
-                        <h3 class="w-full">Sitio web: {{ $oferta->usuarios_empleador->empleadore->sitio_web }}</h3>
-                    </div>                
+                            </div>
+                            @endif
+                    </p>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="lg:w-4/6 mx-auto">
+                @if($asofertas != null)
+                    @if($usuarioAlumno->estatus_estudiante === 'Egresado')
+                        <h3 class="font-bold">Este usuario esta postulado a las siguientes ofertas para egresados:</h3>
+                        @foreach ($asofertas as $asoferta)
+                        <div class="p-4 bg-green-200 text-green-800 rounded mt-4">
+                            <h3>Nombre de la oferta : {{ $asoferta->ofertas_trabajo->nombre }}</h3>
+                            <h3>Nombre de la empresa : {{ $asoferta->ofertas_trabajo->usuarios_empleador->empleadore->razon_social}}</h3>
+                            <h3>Sitio web:   {{  $asoferta->ofertas_trabajo->usuarios_empleador->empleadore->sitio_web}}</h3>
+                            <h3 class="font-bold">Postulado desde: {{$asoferta->fecha_asignacion}}</h3>
+                        </div>
+                            
+                        @endforeach
+                        
+                    <!-- Menu si es residente  --> 
+                    @elseif($usuarioAlumno->estatus_estudiante === 'Residente')
+                    <h3 class="font-bold">Este usuario esta postulado a las siguientes ofertas para residentes:</h3>
+                    @foreach ($asofertas as $asoferta )
+                        <div class="p-4 bg-blue-200 text-blue-800 rounded space-y-2">
+                            <div class="p-4 bg-blue-200 text-blue-800 rounded space-y-2">
+                                <h3 class="w-full">Nombre de la oferta: {{  $asoferta->ofertas_residencium->nombre }}</h3>
+                                <h3 class="w-full">Nombre de la empresa: {{ $asoferta->ofertas_residencium->usuarios_empleador->empleadore->razon_social }}</h3>
+                                <h3 class="w-full">Sitio web: {{ $asoferta->ofertas_residencium->usuarios_empleador->empleadore->sitio_web }}</h3>
+                                <h3 class="font-bold w-full">Postulado desde: {{$asoferta->fecha_asignacion}}</h3>
+                            </div>                    
+                        </div>  
+                        
+                    @endforeach
+                                  
                     @endif
+                @else
+                <div class="p-4 bg-red-200 text-red-800 rounded">
+                    <h3 class="font-bold">Este usuario no esta postulado a una oferta actualmente</h3>
+                </div>
                 @endif
             </div>
     </div>

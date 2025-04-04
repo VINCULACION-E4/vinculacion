@@ -91,9 +91,9 @@
             @if ($ofTrabajos->isNotEmpty())
                 <p class="text-center text-xl font-bold text-blue-900">Trabajos creados por el empleador</p><br>
                 @foreach ($ofTrabajos as $Trabajo)
-                    <div class="bg-blue-50 border border-gray-200 p-6 rounded-lg">
+                    <div class="bg-blue-50 border border-gray-200 p-6 rounded-lg mb-4"> <!-- Añadido mb-4 para espaciado entre tarjetas -->
                         <div class="w-10 h-10 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4">
-                            <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+                            <a class="flex title-font font-medium items-center text-gray-900 mb-2 md:mb-0">
                                 <img src="{{ asset('images/trabajo.png') }}" alt="Logo de la empresa" class="w-15 h-10">
                             </a>
                         </div>
@@ -102,10 +102,10 @@
                             {{ $Trabajo->vacantes_disponibles }} vacantes disponibles
                         </div>
                         <p class="leading-relaxed text-base">{{ $Trabajo->descripcion }}</p>
-                        <a href="{{ url('/infoTrabajo/' . $Trabajo->idoferta) }}"class="text-indigo-500 inline-flex items-center">Mostrar más / rechazar
+                        <a href="{{ url('/infoTrabajo/' . $Trabajo->idoferta) }}" class="text-indigo-500 inline-flex items-center">Mostrar más / rechazar
                             <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                              <path d="M5 12h14"></path>
-                              <path d="M12 5l7 7-7 7"></path>
+                            <path d="M5 12h14"></path>
+                            <path d="M12 5l7 7-7 7"></path>
                             </svg>
                         </a>
                     </div>

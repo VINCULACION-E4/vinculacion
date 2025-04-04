@@ -42,13 +42,11 @@ class LoginController extends Controller
 
         if (!$user) {
             Log::error('Usuario no encontrado', ['tipo' => $tipo, 'identificador' => $request->identificador]);
-            return 'user';
             return back()->withErrors(['identificador' => 'Usuario no encontrado.']);
         }
 
         if (!Hash::check($request->password, $user->password)) {
             Log::error('Contraseña incorrecta', ['identificador' => $request->identificador]);
-            return 'pass';
             return back()->withErrors(['password' => 'Contraseña incorrecta.']);
         }
         

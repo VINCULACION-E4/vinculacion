@@ -45,10 +45,14 @@
   <br>
   
   <div class="text-center text-xl font-bold text-green-500 sm:text-left sm:text-2xl lg:text-3xl">
-    <h2>Alumnos asignados</h2>
+    <h2>Alumnos postulados:</h2>
   <div>
   <br>
-
+  @if($asignaciones->isEmpty())
+    <div class="text-center text-red-500 font-bold">
+        No hay alumnos postulados para esta oferta.
+    </div>
+  @endif
   @foreach($asignaciones as $asignacion)
     <div class="container px-4 py-1 mx-auto flex items-center md:flex-row flex-col bg-gray-100 border-3 rounded-xl border-gray-200 mb-3">
         <div class="flex flex-col md:pr-10 md:mb-0 mb-6 pr-0 w-full md:w-auto md:text-left text-center">

@@ -68,6 +68,9 @@ class EncuestasController extends Controller
         }
     }
 
+    public function confirmarCambios($id) {
+    }
+
     public function actualizar(Request $request, $id){
         $nuevoTitulo = $request->input('titulo');
         $nuevaDescripcion = $request->input('descripcion');
@@ -82,6 +85,7 @@ class EncuestasController extends Controller
         $encuesta->save();
         //borrar todas las preguntas asignadas
         preguntasEncuesta::where('encuestas_idencuesta', $id)->delete();
+        RespuestasPregunta::where('idencuesta', $id)->delete();
         //reasignar las preguntas
         $nuevasPreguntas = $request->input('preguntas');
         if($nuevasPreguntas != null){
@@ -106,6 +110,18 @@ class EncuestasController extends Controller
         }
         $cambioExitoso = true;
         return view ('layouts.homeVinculacion');
+    }
+
+    public function confirmar($id){
+        $encuesta = Encuesta::find($id);
+        return view('encuestas.confirmarCambios' , compact('encuesta'));
+    }
+    public function delate($id){
+        preguntasEncuesta::where('encuestas_idencuesta', $id)->delete();
+        RespuestasPregunta::where('idencuesta', $id)->delete();
+        $encuesta = Encuesta::find($id);
+        $encuesta->delete();
+        return view('layouts.homeVinculacion');
     }
 
     public function editar($id){

@@ -4,6 +4,12 @@
     @if ($encuesta==null)
         <form action="/editorEncuesta" method="POST" class="bg-white p-6 rounded-lg shadow-md w-160">
             @csrf
+            <div class="flex justify-between mb-4">
+                <a href="javascript:history.back()" 
+                   class="bg-gray-400 text-white px-4 py-2 rounded-lg hover:bg-gray-500">
+                    ← Regresar
+                </a>
+            </div>
             <h2 class="text-xl font-bold mb-4 text-center">Crear encuesta</h2>
             <input type="hidden" name="idEmpleado" value="{{ $authUser->idusuario_vinculacion }}">
             <label for="nombre" class="block text-gray-700 font-medium">Nombre de la encuesta:</label>
@@ -37,15 +43,29 @@
             <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600">Guardar Encuesta</button>
         </form>
     @else
-        <form action="/editorEncuesta/{{ $encuesta->idencuesta }}" method="POST" class="bg-white p-6 rounded-lg shadow-md w-160">
+        <form action="/editorEncuesta/{{ $encuesta->idencuesta }}" method="POST" class="bg-white p-6 rounded-lg shadow-md w-160" onsubmit="return confirmarGuardado()">
             @csrf
+            <div class="flex justify-between mb-4">
+                <a href="javascript:history.back()" 
+                   class="bg-gray-400 text-white px-4 py-2 rounded-lg hover:bg-gray-500">
+                    ← Regresar
+                </a>
+                <a href="/confirmarCambios/{{ $encuesta->idencuesta }}" 
+                   class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700">
+                    🗑 Borrar Encuesta
+                </a>
+            </div>
+            
             <h2 class="text-xl font-bold mb-4 text-center">Editar encuesta</h2>
             <label for="nombre" class="block text-gray-700 font-medium">Encuesta creada por: {{ $encuesta->usuarios_vinculacion->nombre }} {{ $encuesta->usuarios_vinculacion->apellido_paterno }}</label>
             <input type="hidden" name="idEmpleado" value="{{ $authUser->idusuario_vinculacion }}">
+        
             <label for="nombre" class="block text-gray-700 font-medium">Nombre de la encuesta:</label>
             <input type="text" id="nombre" name="titulo" required class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4 " value="{{ $encuesta->titulo }}">
+            
             <label for="descripcion" class="block text-gray-700 font-medium">Descripción:</label>
             <textarea id="descripcion" name="descripcion" rows="4" required class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4 ">{{ $encuesta->descripcion }}</textarea>
+            
             <div class="flex items-center gap-4 bg-gray-100 p-3 rounded-lg shadow">
                 <h3 class="text-lg font-semibold text-gray-700">Carrera dirigida:</h3>
                 <select id="options" name="carrera" class="px-4 py-2 rounded-md border border-gray-300 bg-white shadow-sm focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 text-gray-700">
@@ -55,6 +75,7 @@
                     @endforeach
                 </select>
             </div> 
+        
             <h3 class="text-xl font-bold mb-4 text-center">Selecciona una pregunta del banco de preguntas o crea una nueva pregunta</h3>
             <select id="options" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                 onchange="cargarPregunta(this.value)">
@@ -79,17 +100,19 @@
                                 value="{{ old('preguntas.' . $asPregunta->pregunta->id) }}"
                             >
                         </div>
-             @endforeach
-
+                @endforeach
             </div>
+        
             <button type="button" id="agregar-pregunta" class="w-full bg-green-500 text-white py-2 rounded-lg hover:bg-green-600 mb-2">Agregar Pregunta</button>
             <button type="button" id="quitar-pregunta" class="w-full bg-red-500 text-white py-2 rounded-lg hover:bg-red-600 mb-4">Quitar Última Pregunta</button>
-            
+        
+            <!-- Mensaje de advertencia en rojo -->
+            <p class="text-red-600 font-bold text-center mb-4">⚠️ Las respuestas asociadas serán eliminadas al guardar cambios.</p>
+        
             <button type="submit" class="w-full bg-yellow-200 text-black py-2 rounded-lg hover:bg-yellow-300">Guardar cambios</button>
         </form>
     @endif
     <script>
-
         function cargarPregunta(texto) {
             let container = document.getElementById('preguntas-container');
             let div = document.createElement('div');
@@ -127,6 +150,12 @@
                 container.removeChild(container.lastChild);
             }
         });
+        
+    </script>
+    <script>
+        function confirmarGuardado() {
+            return confirm("¿Estás seguro de que deseas guardar los cambios? Las respuestas asociadas serán eliminadas.");
+        }
     </script>
 </div>
 @endsection

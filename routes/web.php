@@ -50,8 +50,6 @@ Route::get('/vinculacion_ofertas', [VinculacionController::class, 'index'])->nam
 Route::get('/vinculacion/cambiarEstadoResidencia/{id}/{estado}', [VinculacionController::class, 'cambiarEstadoResidencia'])->name('vinculacion.cambiarEstadoResidencia');
 Route::get('/vinculacion/cambiarEstadoTrabajo/{id}/{estado}', [VinculacionController::class, 'cambiarEstadoTrabajo'])->name('vinculacion.cambiarEstadoTrabajo');
 
-
-
 //mostrarAlumnos
 Route::get('/mostrarAlumnos', [UsuarioAlumnoController::class, 'index']);
 Route::post('/mostrarAlumnos', [UsuarioAlumnoController::class, 'index']);
@@ -73,6 +71,8 @@ Route::get('/editorEncuesta', [EncuestasController::class, 'preguntas'])->name('
 Route::get('/editorEncuesta/{id}', [EncuestasController::class, 'editar'])->name('encuestas.editor'); //editor para actualizar encuesta
 Route::post('/editorEncuesta/{id}', [EncuestasController::class, 'actualizar']); //actualizar encuesta
 Route::get('/resultadosEncuesta/{id}', [EncuestasController::class, 'mostrarResultados']);
+Route::get('/confirmarCambios/{id}', [EncuestasController::class, 'confirmar']);
+Route::get('/eliminarEncuesta/{id}', [EncuestasController::class, 'delate']);
 //Vistas usuarioAlumno
 Route::get('/dashboard/encuestas',[AlumnoController::class, 'mostrarEncuestas']);
 Route::post('/dashboard/encuestas',[AlumnoController::class, 'mostrarEncuestas']);

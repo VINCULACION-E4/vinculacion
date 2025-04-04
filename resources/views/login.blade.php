@@ -4,86 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f0f8ff;
-        }
-
-
-        .logo-izquierda {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            width: 120px;
-        }
-
-        .logo-derecha {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            width: 120px;
-        }
-
-        
-
-        .container {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px gray;
-            text-align: center;
-            width: 300px;
-        }
-        button {
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            padding: 10px;
-            margin: 5px;
-            cursor: pointer;
-            border-radius: 5px;
-            width: 100%;
-        }
-        input {
-            display: block;
-            width: 100%;
-            padding: 10px;
-            margin: 10px -10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        .hidden {
-            display: none;
-        }
-    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="bg-[#f0f8ff] flex justify-center items-center h-screen">
 
-<img src="/resources/pleca_tecnm.jpg" alt="Logo TecNM" class="logo-izquierda">
-<img src="/resources/morelia.png" alt="Logo Morelia" class="logo-derecha">
+    <img src="/resources/pleca_tecnm.jpg" alt="Logo TecNM" class="absolute top-10 left-10 w-24">
 
-    <div class="container">
-        
-        
-        <h2>Selecciona tu tipo de usuario</h2>
-        
-        <button onclick="showForm('alumno')">Alumno</button>
-        <button onclick="showForm('empleador')">Empleador</button>
-        <button onclick="showForm('vinculacion')">Vinculación</button>
+    <img src="/resources/morelia.png" alt="Logo Morelia" class="absolute top-10 right-10 w-24">
 
-        <form method="POST" action="{{ route('login.perform') }}" class="hidden" id="loginForm">
+    <div class="bg-white p-6 rounded-lg shadow-lg text-center w-80">
+        
+        <h2 class="text-xl font-semibold mb-4">Selecciona tu tipo de usuario</h2>
+
+        @if($errors->any())
+            <div class="bg-red-100 text-red-600 p-4 mb-4 rounded">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        <button onclick="showForm('alumno')" class="bg-blue-500 text-white py-2 px-4 rounded-full w-full mb-2 hover:bg-blue-600">Alumno</button>
+        <button onclick="showForm('empleador')" class="bg-blue-500 text-white py-2 px-4 rounded-full w-full mb-2 hover:bg-blue-600">Empleador</button>
+        <button onclick="showForm('vinculacion')" class="bg-blue-500 text-white py-2 px-4 rounded-full w-full mb-4 hover:bg-blue-600">Vinculación</button>
+
+        <form method="POST" action="{{ route('login.perform') }}" id="loginForm" class="hidden">
             @csrf
-            <input type="hidden" id="tipo" name="tipo">
-            <input type="text" id="identificador" name="identificador" placeholder="Identificación">
-            <input type="password" name="password" placeholder="Contraseña">
-            <button type="submit">Iniciar Sesión</button>
+            <input type="hidden" id="tipo" name="tipo" class="hidden">
+            <input type="text" id="identificador" name="identificador" placeholder="Identificación" class="w-full p-3 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <input type="password" name="password" placeholder="Contraseña" class="w-full p-3 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600">Iniciar Sesión</button>
         </form>
     </div>
+
     <script>
         function showForm(tipo) {
             document.getElementById('tipo').value = tipo;
@@ -92,8 +47,8 @@
                 tipo === 'alumno' ? 'Número de Control' : 
                 tipo === 'empleador' ? 'RFC' : 
                 tipo === 'vinculacion' ? 'Usuario' : '';
-
         }
     </script>
+
 </body>
 </html>

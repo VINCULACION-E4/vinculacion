@@ -39,21 +39,17 @@ class UsuarioAlumnoController extends Controller
         $alumno = Alumno::where('numero_control', $id)->first();
         $usuarioAlumno = UsuariosAlumno::where('alumno_numero_control', $id)->first();
 
-        $asOfertaResidencia = AsignacionResidencium::where('usuarios_alumno_idusuarios_alumno', $usuarioAlumno->idusuarios_alumno)->first();
-        $asOfertaTrabajo = AsignacionTrabajo::where('usuarios_alumno_idusuarios_alumno', $usuarioAlumno->idusuarios_alumno)->first();
-        if ($asOfertaResidencia) {
-            $oferta = OfertasResidencium::where('idoferta', $asOfertaResidencia->ofertas_residencia_idoferta)->first();
-            $fecha = $asOfertaResidencia->fecha_asignacion;
-        } elseif ($asOfertaTrabajo) {
-            $oferta = OfertasTrabajo::where('idoferta', $asOfertaTrabajo->ofertas_trabajo_idoferta)->first();
-            $fecha = $asOfertaTrabajo->fecha_asignacion;
+        if ($usuarioAlumno->estatus_estudiante == 'Residente') {
+            $asofertas = AsignacionResidencium::where('usuarios_alumno_idusuarios_alumno', $usuarioAlumno->idusuarios_alumno)->get();
+            return view('usuariosAlumnos.info', compact('alumno', 'usuarioAlumno', 'asofertas'));
+        } elseif ($usuarioAlumno->estatus_estudiante == 'Egresado') {
+            $asofertas = AsignacionTrabajo::where('usuarios_alumno_idusuarios_alumno', $usuarioAlumno->idusuarios_alumno)->get();
+            return view('usuariosAlumnos.info', compact('alumno', 'usuarioAlumno', 'asofertas'));
         } else {
-            $oferta = null;
+            $ofertas = null;
             $fecha = null;
         }
-
-        return view('usuariosAlumnos.info', compact('alumno', 'usuarioAlumno', 'oferta', 'fecha'));
-            
+        return view('usuariosAlumnos.info', compact('alumno', 'usuarioAlumno', 'ofertas', 'fecha'));    
     }
 
     public function actualizarAlumno(Request $request, $id) {
