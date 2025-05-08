@@ -49,24 +49,35 @@ class AlumnoController extends Controller
         return view('alumno.encuestas', compact('encuestas'));
     }
 
-    public function listarOfertas(){
+    public function listarOfertas() {
         $userAl = Auth::guard('usuarios_alumno')->user();
-        if($userAl->estatus_estudiante == 'Residente'){
+    
+        if ($userAl->estatus_estudiante == 'Residente') {
             $ofertasTrabajo = null;
             $ofertasChambaAplicada = null;
-            $ofertasResidencia = OfertasResidencium::Where('carrera_solicitada',$userAl->alumno->carrera->nombre)->get();
-            $ofertasResAplicada = AsignacionResidencium::Where('usuarios_alumno_idusuarios_alumno',$userAl->idusuarios_alumno)->get();
-            return view ('alumno.listarOfertas', compact('ofertasResidencia', 'ofertasTrabajo', 'ofertasResAplicada','ofertasChambaAplicada'));
-        }else if($userAl->estatus_estudiante == 'Egresado'){
-            $ofertasResidencia=null;
+            $ofertasAplicadasIds = AsignacionResidencium::where('usuarios_alumno_idusuarios_alumno', $userAl->idusuarios_alumno)
+                ->pluck('ofertas_residencia_idoferta');
+            $ofertasResidencia = OfertasResidencium::where('carrera_solicitada', $userAl->alumno->carrera->nombre)
+                ->whereNotIn('idoferta', $ofertasAplicadasIds)
+                ->get();
+            $ofertasResAplicada = AsignacionResidencium::where('usuarios_alumno_idusuarios_alumno', $userAl->idusuarios_alumno)->get();
+            return view('alumno.listarOfertas', compact('ofertasResidencia', 'ofertasTrabajo', 'ofertasResAplicada', 'ofertasChambaAplicada'));
+        } else if ($userAl->estatus_estudiante == 'Egresado') {
+            $ofertasResidencia = null;
             $ofertasResAplicada = null;
-            $ofertasTrabajo = OfertasTrabajo::where('carrera_solicitada',$userAl->alumno->carrera->nombre)->get();
-            $ofertasChambaAplicada = AsignacionTrabajo::Where('usuarios_alumno_idusuarios_alumno',$userAl->idusuarios_alumno)->get();   
-            
-            return view ('alumno.listarOfertas', compact('ofertasResidencia', 'ofertasTrabajo', 'ofertasResAplicada','ofertasChambaAplicada'));
+            $ofertasTrabajoAplicadasIds = AsignacionTrabajo::where('usuarios_alumno_idusuarios_alumno', $userAl->idusuarios_alumno)
+                ->pluck('ofertas_trabajo_idoferta');
+            $ofertasTrabajo = OfertasTrabajo::where('carrera_solicitada', $userAl->alumno->carrera->nombre)
+                ->whereNotIn('idoferta', $ofertasTrabajoAplicadasIds)
+                ->get();
+            $ofertasChambaAplicada = AsignacionTrabajo::where('usuarios_alumno_idusuarios_alumno', $userAl->idusuarios_alumno)->get();
+            return view('alumno.listarOfertas', compact('ofertasResidencia', 'ofertasTrabajo', 'ofertasResAplicada', 'ofertasChambaAplicada'));
         }
+    
         return 'Error de carga';
-    } 
+    }
+    
+    
 
     public function nuevaAsignacion(Request $request){
         $idOferta = $request->input('oferta_id');
@@ -82,9 +93,11 @@ class AlumnoController extends Controller
                     'usuarios_alumno_idusuarios_alumno'=> $userAl->idusuarios_alumno,
                     'fecha_asignacion'=>Carbon::now()->toDateString()
                 ]);
+                /*
                 $oferta = OfertasResidencium::find($idOferta);
                 $oferta->vacantes_disponibles =  $oferta->vacantes_disponibles-1;
                 $oferta->save();
+                */
             }else{
                 return view ('alumno.error');
             }
@@ -99,10 +112,11 @@ class AlumnoController extends Controller
                     'usuarios_alumno_idusuarios_alumno'=> $userAl->idusuarios_alumno,
                     'fecha_asignacion'=>Carbon::now()->toDateString()
                 ]);
-                
+                /*
                 $oferta = OfertasTrabajo::find($idOferta);
                 $oferta->vacantes_disponibles =  $oferta->vacantes_disponibles-1;
                 $oferta->save();
+                */
             }
             else{
                 return view ('alumno.error');
@@ -116,17 +130,22 @@ class AlumnoController extends Controller
         $tipo = $request->input('tipo');
         if($tipo == 'residencia'){
             $asOferta = AsignacionResidencium::find($id);
+            /*
             $oferta = OfertasResidencium::find($asOferta->ofertas_residencia_idoferta);
             $oferta->vacantes_disponibles =  $oferta->vacantes_disponibles+1;
             $oferta->save();
+            */
             AsignacionResidencium::destroy($id);
         }else if($tipo == 'trabajo'){
             $asOferta = AsignacionTrabajo::find($id);
+            /*
             $oferta = OfertasTrabajo::find($asOferta->ofertas_trabajo_idoferta);
             $oferta->vacantes_disponibles =  $oferta->vacantes_disponibles+1;
             $oferta->save();
+            */
             AsignacionTrabajo::destroy($id);
         }
+        return view('alumno.asignacionEliminada');
         
         if($userAl->estatus_estudiante == 'Residente'){
             $ofertasTrabajo = null;

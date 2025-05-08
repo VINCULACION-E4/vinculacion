@@ -2,7 +2,7 @@
 @section('content')
 <div class=" w-190  item-center text-center justify-center  mx-auto">
     @if ($encuesta==null)
-        <form action="/editorEncuesta" method="POST" class="bg-white p-6 rounded-lg shadow-md w-160">
+    <form action="/editorEncuesta" method="POST" class="bg-white p-6 rounded-lg shadow-md w-160" onsubmit="return validarFormulario()">
             @csrf
             <div class="flex justify-between mb-4">
                 <a href="javascript:history.back()" 
@@ -155,6 +155,25 @@
     <script>
         function confirmarGuardado() {
             return confirm("¿Estás seguro de que deseas guardar los cambios? Las respuestas asociadas serán eliminadas.");
+        }
+    </script>
+    <script>
+        function validarFormulario() {
+            const preguntas = document.getElementsByName('preguntas[]');
+            if (preguntas.length === 0) {
+                alert("Debes agregar al menos una pregunta a la encuesta.");
+                return false;
+            }
+    
+            // También puedes validar que no estén vacías
+            for (let i = 0; i < preguntas.length; i++) {    
+                if (preguntas[i].value.trim() === "") {
+                    alert("Todas las preguntas deben tener contenido.");
+                    return false;
+                }
+            }
+    
+            return confirmarGuardado(); // Llama a la función que ya tienes
         }
     </script>
 </div>

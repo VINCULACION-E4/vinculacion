@@ -58,7 +58,7 @@ $authUser = Auth::guard('usuarios_alumno')->user();
         @endforeach
     </div>
 @endif
-
+<!-- Aqui se enlistan las ofertas residencia/trabajo dependiendo del tipo de alumno-->
 @if($authUser->estatus_estudiante == 'Residente')
 <h3 class="text-center text-2xl font-bold text-gray-800 mt-8 mb-6">Ofertas de Residencia disponibles</h3>
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

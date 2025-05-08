@@ -121,7 +121,7 @@ class EncuestasController extends Controller
         RespuestasPregunta::where('idencuesta', $id)->delete();
         $encuesta = Encuesta::find($id);
         $encuesta->delete();
-        return view('layouts.homeVinculacion');
+        return view('layouts.encuestaEliminada');
     }
 
     public function editar($id){

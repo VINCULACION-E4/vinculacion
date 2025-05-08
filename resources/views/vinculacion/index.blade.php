@@ -42,10 +42,10 @@
                 <th class="border border-gray-300 px-4 py-2">#</th>
                 <th class="border border-gray-300 px-4 py-2">Nombre</th>
                 <th class="border border-gray-300 px-4 py-2">Descripción</th>
-                <th class="border border-gray-300 px-4 py-2">ubicacion</th>
+                <th class="border border-gray-300 px-4 py-2">Ubicación</th>
                 <th class="border border-gray-300 px-4 py-2">Vacantes Disponibles</th>
                 <th class="border border-gray-300 px-4 py-2">Salario</th>
-                <th class="border border-gray-300 px-4 py-2">Area de Trabajo</th>
+                <th class="border border-gray-300 px-4 py-2">Área de trabajo</th>
                 <th class="border border-gray-300 px-4 py-2">Carrera Solicitada</th>
                 <th class="border border-gray-300 px-4 py-2">Estado</th>
                 <th class="border border-gray-300 px-4 py-2">Acciones</th>
