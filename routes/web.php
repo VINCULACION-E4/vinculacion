@@ -55,9 +55,18 @@ Route::get('/mostrarAlumnos', [UsuarioAlumnoController::class, 'index']);
 Route::post('/mostrarAlumnos', [UsuarioAlumnoController::class, 'index']);
 Route::get('/infoAlumno/{id}', [UsuarioAlumnoController::class, 'mostrarInfo']);
 Route::post('/infoAlumno/{id}', [UsuarioAlumnoController::class, 'actualizarAlumno']);
-//Empleadores
+Route::get('/alumnosCSV', [UsuarioAlumnoController::class, 'alumnosCSV']);
+
+
+//Empleadores desde vinculacion
 Route::get('/mostrarEmpleadores', [UsuarioEmpleadorController::class, 'index']);
 Route::get('/infoEmpleador/{id}', [UsuarioEmpleadorController::class, 'mostrarInfo']);
+Route::post('/infoEmpleador/{id}', [UsuarioEmpleadorController::class, 'mostrarInfo'])->name('usuariosEmpleador.mostrarInfo');
+Route::post('/infoEmpleador/actualizarEmpleador/{id}', [UsuarioEmpleadorController::class, 'actualizarEmpleador']);
+Route::get('/infoEmpleador/eliminar/{id}', [UsuarioEmpleadorController::class, 'eliminarEmpleador']);
+Route::get('/empleadoresCSV', [UsuarioEmpleadorController::class, 'empleadoresCSV']);
+
+
 Route::get('/infoResidencia/{id}', [UsuarioEmpleadorController::class, 'mostrarResidencia']);
 Route::post('/infoResidencia/{id}', [UsuarioEmpleadorController::class, 'eliminarResidencia']);
 Route::get('/infoTrabajo/{id}', [UsuarioEmpleadorController::class, 'mostrarTrabajo']);
@@ -81,6 +90,10 @@ Route::post('/dashboard/encuestas-respuesta{id}',[AlumnoController::class, 'mand
 Route::get('/ofertas',[AlumnoController::class, 'listarOfertas']);
 Route::post('/ofertas',[AlumnoController::class, 'nuevaAsignacion'])->name('alumno.listarOfertas');
 Route::post('/ofertas{id}',[AlumnoController::class, 'eliminarAsignacion'])->name('alumno.listarOfertas');
+Route::get('/perfil',[AlumnoController::class, 'perfil']);
+Route::post('/perfil',[AlumnoController::class, 'perfil']);
+Route::post('/guardarPerfil',[AlumnoController::class, 'guardarPerfil'])->name('alumno.guardarPerfil');
+
 //vitas para empleadores
 Route::get('/dashboardEmpresa', [EmpresaController::class, 'index']);
 Route::get('/editor-oferta', [EmpresaController::class, 'abirEditor']);
@@ -91,6 +104,8 @@ Route::post('/editor-oferta/residencia{id}', [EmpresaController::class, 'actuali
 Route::post('/editor-oferta/trabajo{id}', [EmpresaController::class, 'actualizarDatosTra'])->name('empresa.editor');
 Route::get('/eliminarResidencia/{id}', [EmpresaController::class, 'delResidencia']);
 Route::get('/eliminarTrabajo/{id}', [EmpresaController::class, 'delTrabajo']);
+Route::get('/aspirantes-oferta/residencia{id}', [EmpresaController::class, 'aspirantesResidencia']);
+Route::get('/aspirantes-oferta/trabajo{id}', [EmpresaController::class, 'aspirantesTrabajo']);
 //Route::get('/mostrarEncuesta/{id}', [EncuestasController::class, 'show']);
 /*
 Route::get('/editorEncuesta', function () {

@@ -7,6 +7,7 @@ use App\Models\OfertasTrabajo;
 
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 use App\Models\UsuariosEmpleador;
 use App\Models\Empleadore;
 
@@ -104,6 +105,64 @@ class UsuarioEmpleadorController extends Controller
             
     }
 
+    public function actualizarEmpleador(Request $request, $id)
+    {
+        $empleador = Empleadore::where('rfc', $id)->first();
+        if ($empleador) {
+            $empleador->nombre_comercial = $request->input('nombre_comercial');
+            $empleador->descripcion_de_la_empresa = $request->input('descripcion_de_la_empresa');
+            $empleador->correo_persona_responsable = $request->input('correo_persona_responsable');
+            $empleador->telefono_persona_responsable = $request->input('telefono_persona_responsable');
+            $empleador->sitio_web = $request->input('sitio_web');
+
+            $empleador->razon_social = $request->input('razon_social');
+            $empleador->tipo_de_empresa = $request->input('tipo_empresa');
+            $empleador->sector = $request->input('sector');
+            $empleador->giro = $request->input('giro');
+            $empleador->numero_empleados = $request->input('numero_empleados');
+            $empleador->direccion_empresa = $request->input('direccion_empresa');
+            $empleador->colonia = $request->input('colonia');
+            $empleador->ciudad = $request->input('ciudad');
+            $empleador->estado = $request->input('estado');
+            $empleador->codigo_postal = $request->input('codigo_postal');
+            $empleador->pais = $request->input('pais');
+            $empleador -> save();
+            return view ('usuariosEmpleadores.confirmar')->with('success', 'Empleador actualizado correctamente.');
+        }
+        return view('usuariosEmpleadores.index')->with('error', 'Empleador no encontrado.');
+    }
+
+    public function eliminarEmpleador($id)
+    {
+        $empleador = Empleadore::where('rfc', $id)->first();
+        $usuarioEmpleador = $empleador->usuarios_empleadors;
+        if ($empleador) {
+            foreach ($empleador->usuarios_empleadors as $usuarioEmpleador) {
+                // Borrar asignaciones y ofertas de residencia
+                foreach ($usuarioEmpleador->ofertas_residencia as $ofertaResidencia) {
+                    $ofertaResidencia->asignacion_residencia()->delete();
+                    $ofertaResidencia->delete();
+                }
+            
+                // Borrar asignaciones y ofertas de trabajo
+                foreach ($usuarioEmpleador->ofertas_trabajos as $ofertaTrabajo) {
+                    $ofertaTrabajo->asignacion_trabajos()->delete();
+                    $ofertaTrabajo->delete();
+                }
+            
+                // Borrar el usuario empleador
+                $usuarioEmpleador->delete();
+            }
+            $empleadores = UsuariosEmpleador::where('nombre_usuario', 'like', '%' . $search . '%')
+                            ->orWhereHas('empleadore', function($query) use ($search) {
+                                $query->where('nombre_comercial', 'like', '%' . $search . '%');
+                            })
+                        ->get();
+            return view('usuariosEmpleadores.index', compact('empleadores'));
+        }
+        return view ('usuariosEmpleadores.index')->with('error', 'Empleador no encontrado.');
+    }
+
     public function mostrarResidencia($id)
     {
         $oferta = OfertasResidencium::where('idoferta', $id)->first();
@@ -133,5 +192,66 @@ class UsuarioEmpleadorController extends Controller
         AsignacionTrabajo::where('ofertas_trabajo_idoferta', $idEliminada)->delete();
         OfertasTrabajo::destroy($idEliminada);
         return view('layouts.homeVinculacion');
+    }
+
+    public function empleadoresCSV()
+    {
+        // Cargar los datos con relaciones (si las hay)
+        $empleadores = UsuariosEmpleador::all();
+        
+        // Cabeceras del CSV
+        $headers = [
+            'Content-Type' => 'text/csv; charset=UTF-8',
+            'Content-Disposition' => 'attachment; filename="empleadores.csv"',
+        ];
+
+        // Generar el CSV
+        $callback = function() use ($empleadores) {
+            $handle = fopen('php://output', 'w');
+            fwrite($handle, "\xEF\xBB\xBF");
+            // Escribir las cabeceras
+            fputcsv($handle, [
+                'RFC',
+                'Nombre Comercial',
+                'Razón Social',
+                'Tipo de Empresa',
+                'Sector',
+                'Giro',
+                'Número de Empleados',
+                'Dirección',
+                'Colonia',
+                'Ciudad',
+                'Estado',
+                'Código Postal',
+                'País',
+                'Descripción de la Empresa',
+                'Sitio Web'
+            ]);
+            
+            // Escribir los datos
+            foreach ($empleadores as $empleador) {
+                fputcsv($handle, [
+                    $empleador->empleadore->rfc ?? '',
+                    $empleador->empleadore->nombre_comercial ?? '',
+                    $empleador->empleadore->razon_social ?? '',
+                    $empleador->empleadore->tipo_de_empresa ?? '',
+                    $empleador->empleadore->sector ?? '',
+                    $empleador->empleadore->giro ?? '',
+                    $empleador->empleadore->numero_empleados ?? '',
+                    $empleador->empleadore->direccion_empresa ?? '',
+                    $empleador->empleadore->colonia ?? '',
+                    $empleador->empleadore->ciudad ?? '',
+                    $empleador->empleadore->estado ?? '',
+                    $empleador->empleadore->codigo_postal ?? '',
+                    $empleador->empleadore->pais ?? '',
+                    $empleador->empleadore->descripcion_de_la_empresa ?? '',
+                    $empleador->empleadore->sitio_web ?? ''
+                ]);
+            }
+            
+            fclose($handle);
+        };
+
+        return Response::stream($callback, 200, $headers);
     }
 }

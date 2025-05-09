@@ -178,4 +178,15 @@ class EmpresaController extends Controller
         OfertasTrabajo::findOrFail($id)->delete();
         return view('empresa.completado');
     }
+
+    public function aspirantesResidencia($id){
+        $asignaciones = AsignacionResidencium::where('ofertas_residencia_idoferta',$id)->get();
+        $oferta = OfertasResidencium::where('idoferta',$id)->first();
+        return view('empresa.aspirantesResidencia', compact('asignaciones','oferta'));
+    }
+    public function aspirantesTrabajo($id){
+        $asignaciones = AsignacionTrabajo::where('ofertas_trabajo_idoferta',$id)->get();
+        $oferta = OfertasTrabajo::where('idoferta',$id)->first();
+        return view('empresa.aspirantesTrabajo', compact('asignaciones','oferta'));
+    }
 }

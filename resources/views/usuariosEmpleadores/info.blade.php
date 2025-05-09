@@ -6,55 +6,120 @@
         <a href="/mostrarEmpleadores" class="font-bold text-purple-700">Empleadores</a>
     </nav>
     <br>
-    <div class="bg-white-100 container px-8 py-24 mx-auto flex flex-col border-2 border-blue-900">
-        <div class="text-center text-3xl font-bold text-blue-900">
+    <!-- Seccion para ver info -->
+    <form action="/infoEmpleador/actualizarEmpleador/{{ $empleador->rfc }}" method="POST" class="bg-white-100 container px-8 py-24 mx-auto flex flex-col border-2 border-blue-900">
+        @csrf
+    
+        <div class="text-center text-3xl font-bold text-blue-900 mb-6">
             Información del empleador  
         </div>
         
-            <div class="lg:w-4/6 mx-auto">
-                <div class="flex flex-col sm:flex-row mt-10">
-
-                    <div class="sm:w-1/3 text-center sm:pr-8 sm:py-8">
-                    <div class="w-20 h-20 rounded-full inline-flex items-center justify-center bg-gray-200 text-gray-400">
+        <div class="lg:w-4/6 mx-auto">
+            <div class="flex flex-col sm:flex-row mt-10">
+                <!-- Lado Izquierdo -->
+                <div class="sm:w-1/3 text-center sm:pr-8 sm:py-8">
+                    <div class="w-20 h-20 rounded-full inline-flex items-center justify-center bg-gray-200 text-gray-400 mx-auto">
                         <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10" viewBox="0 0 24 24">
-                        <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
-                        <circle cx="12" cy="7" r="4"></circle>
+                            <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
                         </svg>
                     </div>
-                    <div class="flex flex-col items-center text-center justify-center">
-                        <h2 class="font-medium title-font mt-4 text-gray-900 text-2xl">{{ $empleador->nombre_comercial}}</h2>
-                        <p class="text-center text-blue-900">
-                            {{ $empleador->descripcion_de_la_empresa}}
-                        </p>
-                        <div class="w-12 h-1 bg-indigo-500 rounded mt-2 mb-4"></div>
-                        <p class="text-base">
-                            <span class="text-purple-500 font-bold">Correo electrónico del responsable:</span> <br>{{ $empleador->correo_persona_responsable}} <br>
-                            <span class="text-purple-500 font-bold">Número telefónico:</span> {{ $empleador->telefono_persona_responsable }}<br>
-                            <span class="text-purple-500 font-bold">Sitio web:</span> {{ $empleador->sitio_web }}
+                    <div class="flex flex-col items-center text-center justify-center space-y-4 mt-4">
+                        <div class="w-full">
+                            <label for="nombre_comercial" class="text-xs text-gray-600">Nombre Comercial</label>
+                            <input type="text" name="nombre_comercial" id="nombre_comercial" class="font-medium title-font mt-1 text-gray-900 text-2xl text-center border border-gray-300 rounded p-1 w-full" value="{{ $empleador->nombre_comercial }}">
+                        </div>
+                        <div class="w-full">
+                            <label for="descripcion_de_la_empresa" class="text-xs text-gray-600">Descripción de la Empresa</label>
+                            <textarea name="descripcion_de_la_empresa" id="descripcion_de_la_empresa" class="text-blue-900 border border-gray-300 mt-1 p-2 rounded w-full" rows="3">{{ $empleador->descripcion_de_la_empresa }}</textarea>
+                        </div>
+                        <div class="w-full">
+                            <label for="correo_persona_responsable" class="text-xs text-gray-600">Correo Electrónico del Responsable</label>
+                            <input type="email" name="correo_persona_responsable" id="correo_persona_responsable" class="text-base border border-gray-300 rounded p-1 w-full" value="{{ $empleador->correo_persona_responsable }}">
+                        </div>
+                        <div class="w-full">
+                            <label for="telefono_persona_responsable" class="text-xs text-gray-600">Número Telefónico</label>
+                            <input type="text" name="telefono_persona_responsable" id="telefono_persona_responsable" class="text-base border border-gray-300 rounded p-1 w-full" value="{{ $empleador->telefono_persona_responsable }}">
+                        </div>
+                        <div class="w-full">
+                            <label for="sitio_web" class="text-xs text-gray-600">Sitio Web</label>
+                            <input type="text" name="sitio_web" id="sitio_web" class="text-base border border-gray-300 rounded p-1 w-full" value="{{ $empleador->sitio_web }}">
+                        </div>
                     </div>
+                </div>
+    
+                <!-- Lado Derecho -->
+                <div class="sm:w-2/3 sm:pl-8 sm:py-8 sm:border-l border-blue-700 sm:border-t-0 border-t mt-4 pt-4 sm:mt-0 text-center sm:text-left">
+                    <div class="space-y-4">
+                        <div>
+                            <label class="text-blue-500 font-bold">Razón social:</label>
+                            <input type="text" name="razon_social" class="w-full border border-gray-300 rounded p-1" value="{{ $empleador->razon_social }}">
+                        </div>
+                        <div>
+                            <label class="text-blue-500 font-bold">Tipo de empresa:</label>
+                            <input type="text" name="tipo_de_empresa" class="w-full border border-gray-300 rounded p-1" value="{{ $empleador->tipo_de_empresa }}">
+                        </div>
+                        <div>
+                            <label class="text-blue-500 font-bold">Sector:</label>
+                            <input type="text" name="sector" class="w-full border border-gray-300 rounded p-1" value="{{ $empleador->sector }}">
+                        </div>
+                        <div>
+                            <label class="text-blue-500 font-bold">Giro:</label>
+                            <input type="text" name="giro" class="w-full border border-gray-300 rounded p-1" value="{{ $empleador->giro }}">
+                        </div>
+                        <div>
+                            <label class="text-blue-500 font-bold">Número de empleados:</label>
+                            <input type="number" name="numero_empleados" class="w-full border border-gray-300 rounded p-1" value="{{ $empleador->numero_empleados }}">
+                        </div>
+                        <div>
+                            <label class="text-blue-500 font-bold">Dirección de la empresa:</label>
+                            <textarea name="direccion_empresa" class="w-full border border-gray-300 rounded p-1" rows="2">{{ $empleador->direccion_empresa }}</textarea>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label for="colonia" class="text-sm text-gray-600 font-semibold">Colonia</label>
+                                <input type="text" id="colonia" name="colonia" class="w-full border border-gray-300 rounded p-1" value="{{ $empleador->colonia }}">
+                            </div>
+                            <div>
+                                <label for="codigo_postal" class="text-sm text-gray-600 font-semibold">Código Postal</label>
+                                <input type="text" id="codigo_postal" name="codigo_postal" class="w-full border border-gray-300 rounded p-1" value="{{ $empleador->codigo_postal }}">
+                            </div>
+                            <div>
+                                <label for="ciudad" class="text-sm text-gray-600 font-semibold">Ciudad</label>
+                                <input type="text" id="ciudad" name="ciudad" class="w-full border border-gray-300 rounded p-1" value="{{ $empleador->ciudad }}">
+                            </div>
+                            <div>
+                                <label for="estado" class="text-sm text-gray-600 font-semibold">Estado</label>
+                                <input type="text" id="estado" name="estado" class="w-full border border-gray-300 rounded p-1" value="{{ $empleador->estado }}">
+                            </div>
+                            <div class="col-span-2">
+                                <label for="pais" class="text-sm text-gray-600 font-semibold">País</label>
+                                <input type="text" id="pais" name="pais" class="w-full border border-gray-300 rounded p-1" value="{{ $empleador->pais }}">
+                            </div>
+                        </div>                        
                     </div>
-
-                    <div class="sm:w-2/3 sm:pl-8 sm:py-8 sm:border-l border-blue-700 sm:border-t-0 border-t mt-4 pt-4 sm:mt-0 text-center sm:text-left">
-                    <p class="leading-relaxed text-lg mb-4">
-                        <span class="text-blue-500 font-bold">Razón social:</span>  {{ $empleador->razon_social}}  <br>
-                            <div class="w-100 h-0.5 bg-indigo-300 rounded mt-2 mb-4"></div>
-                        <span class="text-blue-500 font-bold">Tipo de empresa:</span> {{ $empleador->tipo_de_empresa}}  <br>
-                            <div class="w-60 h-0.5 bg-indigo-300 rounded mt-2 mb-5"></div>
-                        <span class="text-blue-500 font-bold">Sector:</span>  {{ $empleador->sector}}<br>
-                            <div class="w-75 h-0.5 bg-indigo-300 rounded mt-2 mb-5"></div>
-                        <span class="text-blue-500 font-bold">Giro:</span>  {{ $empleador->giro}}<br>
-                            <div class="w-100 h-0.5 bg-indigo-300 rounded mt-2 mb-5"></div>
-                        <span class="text-blue-500 font-bold">Número de empeados:</span>  {{ $empleador->numero_empleados}}<br>
-                            <div class="w-50 h-0.5 bg-indigo-300 rounded mt-2 mb-5"></div>
-                        <span class="text-blue-500 font-bold">Dirección de la empresa:</span>  {{ $empleador->direccion_empresa}}, {{ $empleador->colonia}} {{ $empleador->codigo_postal}}, {{ $empleador->ciudad}}, {{ $empleador->estado}} {{ $empleador->pais}}<br>
-                            <div class="w-150 h-0.5 bg-indigo-300 rounded mt-2 mb-5"></div>
-                    </p>
-                    </div>
-
                 </div>
             </div>
-    </div>
+        </div>
+    
+        <!-- Botón de enviar -->
+        <div class="flex justify-center space-x-4 mt-10">
+            <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 font-bold">
+                Guardar cambios
+            </button>
+            
+            <a href="/infoEmpleador/eliminar/{{ $empleador->rfc }}" 
+               onclick="return confirm('¿Estás seguro de que deseas eliminar este empleador?')" 
+               class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">
+                Eliminar Empleador
+            </a>
+        </div>
+        
+         
+    </form>
     <br>
+    <!-- Seccion para ver ofertas -->
+
     <div class="bg-white-100 container px-8 py-24 mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 border-2 border-green-600">
         <div class="border-r border-gray-300 pr-4">
             @if ($ofResidencias->isNotEmpty())

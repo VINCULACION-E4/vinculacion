@@ -11,7 +11,7 @@ class VinculacionController extends Controller
     // Mostrar todas las ofertas sin filtrar por estado
     public function index()
     {
-        $ofertasResidencia = OfertasResidencium::all(); // Obtener ofertas de residencia
+    $ofertasResidencia = OfertasResidencium::all(); // Obtener ofertas de residencia
     $ofertasTrabajo = OfertasTrabajo::all(); // Asegúrate de tener este modelo
 
     return view('vinculacion.index', compact('ofertasResidencia', 'ofertasTrabajo'));
@@ -26,7 +26,7 @@ class VinculacionController extends Controller
         if ($ofertaResidencia) {
             $ofertaResidencia->estado = $request->estado;
             $ofertaResidencia->save();
-            return redirect()->route('vinculacion.index')->with('success', 'Estado de oferta de residencia actualizado.');
+            return redirect()->route('vinculacion.index', ['tab' => 'residencia'])->with('success', 'Oferta actualizada');
         }
         return redirect()->route('vinculacion.index')->with('error', 'Oferta no encontrada.');
     }
@@ -39,7 +39,7 @@ class VinculacionController extends Controller
         if ($ofertaTrabajo) {
             $ofertaTrabajo->estado = $request->estado;
             $ofertaTrabajo->save();
-            return redirect()->route('vinculacion.index')->with('success', 'Estado de oferta de trabajo actualizado.');
+            return redirect()->route('vinculacion.index', ['tab' => 'trabajo'])->with('success', 'Oferta actualizada');
         }
         return redirect()->route('vinculacion.index')->with('error', 'Oferta no encontrada.');
     }

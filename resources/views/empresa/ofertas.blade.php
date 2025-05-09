@@ -42,7 +42,15 @@
                         <p class="text-gray-700 flex items-center"><span class="mr-2">💰</span><strong>Salario:</strong> ${{ number_format($ofRes->salario, 2) }}</p>
                         <p class="text-gray-700 flex items-center"><span class="mr-2">🏢</span><strong>Área:</strong> {{ $ofRes->area_residencia }}</p>
                         <p class="text-gray-700 flex items-center"><span class="mr-2">🎓</span><strong>Carrera:</strong> {{ $ofRes->carrera_solicitada }}</p>
-                        <a href="/editor-oferta/residencia{{ $ofRes->idoferta }}" class="mt-4 inline-block px-6 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition duration-200">Editar</a>
+
+                        <div class="mt-4 flex space-x-4">
+                            <a href="/editor-oferta/residencia{{ $ofRes->idoferta }}" class="px-6 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition duration-200">
+                                Editar
+                            </a>
+                            <a href="/aspirantes-oferta/residencia{{ $ofRes->idoferta }}" class="px-6 py-2 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition duration-200">
+                                Mostrar Aspirantes
+                            </a>
+                        </div>
                     </div>
                 @endforeach
             </div>
@@ -78,7 +86,15 @@
                         <p class="text-gray-700 flex items-center"><span class="mr-2">💰</span><strong>Salario:</strong> ${{ number_format($ofTra->salario, 2) }}</p>
                         <p class="text-gray-700 flex items-center"><span class="mr-2">🏢</span><strong>Área:</strong> {{ $ofTra->area_trabajo }}</p>
                         <p class="text-gray-700 flex items-center"><span class="mr-2">🎓</span><strong>Carrera:</strong> {{ $ofTra->carrera_solicitada }}</p>
-                        <a href="/editor-oferta/trabajo{{ $ofTra->idoferta }}" class="mt-4 inline-block px-6 py-2 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition duration-200">Editar</a>
+
+                        <div class="mt-4 flex space-x-4">
+                            <a href="/editor-oferta/trabajo{{ $ofTra->idoferta }}" class="px-6 py-2 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition duration-200">
+                                Editar
+                            </a>
+                            <a href="/aspirantes-oferta/trabajo{{ $ofTra->idoferta }}" class="px-6 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition duration-200">
+                                Mostrar Aspirantes
+                            </a>
+                        </div>
                     </div>
                 @endforeach
             </div>

@@ -162,4 +162,22 @@ class AlumnoController extends Controller
             return view ('alumno.listarOfertas', compact('ofertasResidencia', 'ofertasTrabajo', 'ofertasResAplicada','ofertasChambaAplicada'));
         }
     }
+
+    public function perfil(){
+        $userAl = Auth::guard('usuarios_alumno')->user();
+        return view ('alumno.perfil', compact('userAl'));
+    }
+
+    public function guardarPerfil(Request $request){
+        $userAl = Auth::guard('usuarios_alumno')->user();
+        $userAl->nombre_usuario = $request->input('nombre_usuario');
+        $userAl->save();
+
+        $alumno = $userAl->alumno;
+        $alumno->correo_electronico = $request->input('correo_electronico');
+        $alumno->numero_telefonico = $request->input('numero_telefonico');
+        $alumno->save();
+        return view ('alumno.perfil', compact('userAl'));
+       
+    }
 }

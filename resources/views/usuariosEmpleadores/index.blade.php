@@ -20,7 +20,12 @@
     </div>
     
     <br>
-    <h3 class="px-60 md:mr-auto text-xl font-bold mb-4 items-center">Lista de empleadores</h3>
+   <div class="flex justify-between items-center px-60 mb-4">
+        <h3 class="text-xl font-bold">Lista de empleadores</h3>
+        <a href="{{ url('/empleadoresCSV') }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded inline-block">
+            Descargar PDF
+        </a>
+    </div>
 
 
 

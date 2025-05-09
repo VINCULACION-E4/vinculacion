@@ -22,11 +22,11 @@
 
     <!-- Pestañas para alternar entre Ofertas de Residencia y Ofertas de Trabajo -->
     <div class="flex border-b">
-        <button class="py-2 px-4 text-gray-600 hover:text-gray-900 border-b-2 border-transparent focus:border-blue-500 transition"
+        <button id="tab-btn-residencia" class="py-2 px-4 text-gray-600 hover:text-gray-900 border-b-2 border-transparent focus:border-blue-500 transition"
             onclick="setActiveTab('residencia')">
             Ofertas de Residencia
         </button>
-        <button class="py-2 px-4 text-gray-600 hover:text-gray-900 border-b-2 border-transparent focus:border-blue-500 transition"
+        <button id="tab-btn-trabajo" class="py-2 px-4 text-gray-600 hover:text-gray-900 border-b-2 border-transparent focus:border-blue-500 transition"
             onclick="setActiveTab('trabajo')">
             Ofertas de Trabajo
         </button>
@@ -78,11 +78,11 @@
                             Elegir opción
                         </button>
                         <div id="dropdown-residencia-{{ $oferta->idoferta }}" style="z-index:10;" class="hidden absolute bg-white border border-gray-300 mt-1 rounded-md w-32 shadow-lg">
-                            <a href="{{ route('vinculacion.cambiarEstadoResidencia', ['id' => $oferta->idoferta, 'estado' => 'Pendiente']) }}"
+                            <a href="{{ route('vinculacion.cambiarEstadoResidencia', ['id' => $oferta->idoferta, 'estado' => 'Pendiente']) }}?tab=residencia"
                                 class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Pendiente</a>
-                            <a href="{{ route('vinculacion.cambiarEstadoResidencia', ['id' => $oferta->idoferta, 'estado' => 'Aceptada']) }}"
+                            <a href="{{ route('vinculacion.cambiarEstadoResidencia', ['id' => $oferta->idoferta, 'estado' => 'Aceptada']) }}?tab=residencia"
                                 class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Aceptada</a>
-                            <a href="{{ route('vinculacion.cambiarEstadoResidencia', ['id' => $oferta->idoferta, 'estado' => 'Rechazada']) }}"
+                            <a href="{{ route('vinculacion.cambiarEstadoResidencia', ['id' => $oferta->idoferta, 'estado' => 'Rechazada']) }}?tab=residencia"
                                 class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Rechazada</a>
                         </div>
                     </div>
@@ -128,11 +128,11 @@
                             Elegir opción
                         </button>
                         <div id="dropdown-trabajo-{{ $oferta->idoferta }}" style="z-index:10;" class="hidden absolute bg-white border border-gray-300 mt-1 rounded-md w-32 shadow-lg">
-                            <a href="{{ route('vinculacion.cambiarEstadoTrabajo', ['id' => $oferta->idoferta, 'estado' => 'Pendiente']) }}"
+                            <a href="{{ route('vinculacion.cambiarEstadoTrabajo', ['id' => $oferta->idoferta, 'estado' => 'Pendiente']) }}?tab=trabajo"
                                 class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Pendiente</a>
-                            <a href="{{ route('vinculacion.cambiarEstadoTrabajo', ['id' => $oferta->idoferta, 'estado' => 'Aceptada']) }}"
+                            <a href="{{ route('vinculacion.cambiarEstadoTrabajo', ['id' => $oferta->idoferta, 'estado' => 'Aceptada']) }}?tab=trabajo"
                                 class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Aceptada</a>
-                            <a href="{{ route('vinculacion.cambiarEstadoTrabajo', ['id' => $oferta->idoferta, 'estado' => 'Rechazada']) }}"
+                            <a href="{{ route('vinculacion.cambiarEstadoTrabajo', ['id' => $oferta->idoferta, 'estado' => 'Rechazada']) }}?tab=trabajo"
                                 class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Rechazada</a>
                         </div>
                     </div>
@@ -148,18 +148,42 @@
 </div>
 
 
-<script>
-  function toggleDropdown(tab, id) {
-    let dropdown = document.getElementById('dropdown-' + tab + '-' + id);
-    dropdown.classList.toggle('hidden');
-}
 
-function setActiveTab(tab) {
-    // Cambiar visibilidad de las pestañas
-    document.getElementById('residencia').classList.add('hidden');
-    document.getElementById('trabajo').classList.add('hidden');
-    document.getElementById(tab).classList.remove('hidden');
-}
+<script>
+    function toggleDropdown(tab, id) {
+        // Cerrar todos los dropdowns antes de abrir el nuevo
+        document.querySelectorAll('.tab-content .absolute').forEach(el => {
+            el.classList.add('hidden');
+        });
+
+        // Mostrar el dropdown específico
+        const dropdown = document.getElementById('dropdown-' + tab + '-' + id);
+        dropdown.classList.toggle('hidden');
+    }
+
+    function setActiveTab(tab) {
+        document.getElementById('residencia').classList.add('hidden');
+        document.getElementById('trabajo').classList.add('hidden');
+        document.getElementById(tab).classList.remove('hidden');
+    }
+
+    // Cierra los dropdowns si haces clic fuera de ellos
+    document.addEventListener('click', function(event) {
+        const isDropdownButton = event.target.closest('button[onclick^="toggleDropdown"]');
+        const isInsideDropdown = event.target.closest('.absolute');
+
+        if (!isDropdownButton && !isInsideDropdown) {
+            document.querySelectorAll('.tab-content .absolute').forEach(el => {
+                el.classList.add('hidden');
+            });
+        }
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const activeTab = urlParams.get('tab') || 'residencia';
+        setActiveTab(activeTab);
+    });
 
 </script>
 

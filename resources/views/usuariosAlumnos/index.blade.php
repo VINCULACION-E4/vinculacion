@@ -1,7 +1,6 @@
 @extends('layouts.app')
-
 @section('content')
-    
+
     <nav class="md:mr-20-auto md:mr-auto flex flex-wrap items-center text-base justify-center space-x-6">
         <a href="/mostrarAlumnos" class="font-bold text-purple-700">Alumnos</a>
         <div class="border-l-2 border-gray-500 h-6 mx-4"></div> <!-- Línea pequeña en el medio -->
@@ -22,7 +21,13 @@
     </div>
 
     <br>
-    <h3 class="px-60 md:mr-auto text-xl font-bold mb-4 items-center">Lista de alumnos</h3>
+    <div class="flex justify-between items-center px-60 mb-4">
+        <h3 class="text-xl font-bold">Lista de alumnos</h3>
+        <a href="{{ url('/alumnosCSV') }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded inline-block">
+            Descargar PDF
+        </a>
+    </div>
+
 
     @foreach($usuariosAlumnos as $usuario)
     <div class="container px-4 py-1 mx-auto flex items-center md:flex-row flex-col bg-gray-100 border-3 rounded-xl border-gray-200 mb-3">
