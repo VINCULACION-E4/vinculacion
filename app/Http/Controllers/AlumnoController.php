@@ -17,6 +17,10 @@ use App\Models\AsignacionResidencium;
 use App\Models\AsignacionTrabajo; 
 use Carbon\Carbon;
 
+use App\Models\FocusGroup;
+use App\Models\MensajeGrupo;
+use App\Models\Mensaje;
+
 class AlumnoController extends Controller
 {
     public function mostrarEncuestas(){
@@ -179,5 +183,35 @@ class AlumnoController extends Controller
         $alumno->save();
         return view ('alumno.perfil', compact('userAl'));
        
+    }
+
+    public function mostrarFocusGroups(){
+        $focusGroups = FocusGroup::all();
+        return view('alumno.mostrarFG', compact('focusGroups'));
+    }
+
+    public function entrarFG($id)
+    {
+        $focusGroup = FocusGroup::find($id);
+        $mensajesGrupo = MensajeGrupo::where('focus_group_id_focus_group', $id)->get();
+        return view('alumno.detallesFG', compact('focusGroup', 'mensajesGrupo'));
+    }
+
+    public function enviarMensaje(Request $request)
+    {
+        $nuevoMensaje = new Mensaje();
+        $nuevoMensaje->texto = $request->input('texto');
+        $nuevoMensaje->nombre_usuario = $request->input('nombre_usuario');
+        $nuevoMensaje->tipo_usuario = $request->input('tipo_usuario');
+        $nuevoMensaje->save();
+
+        $nuevoMensajeGrupo = new MensajeGrupo();
+        $nuevoMensajeGrupo->mensaje_id_mensaje = $nuevoMensaje->id_mensaje;
+        $nuevoMensajeGrupo->focus_group_id_focus_group = $request->input('focus_group_id_focus_group');
+        $nuevoMensajeGrupo->save();
+        
+        $focusGroup = FocusGroup::find($request->input('focus_group_id_focus_group'));
+        $mensajesGrupo = MensajeGrupo::where('focus_group_id_focus_group', $request->input('focus_group_id_focus_group'))->get();
+        return view('alumno.detallesFG', compact('focusGroup', 'mensajesGrupo'));
     }
 }

@@ -15,10 +15,20 @@
             <nav>
                 <ul class="flex space-x-6">
                     <li>
+                        <a href="/dashboardEmpresa" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg">
+                            🔷Mis ofertas
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/empleador/focus-group/mostrar" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg">
+                            📋 Focus Groups
+                        </a>
+                    </li>
+                    <li>
                         <form action="{{ route('logout') }}" method="POST">
                             @csrf
                             <button type="submit" class="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg">
-                                Cerrar sesión
+                                🔒 Cerrar sesión
                             </button>
                         </form>
                     </li>

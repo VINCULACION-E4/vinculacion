@@ -49,6 +49,16 @@ Route::get('/', function () {
 Route::get('/vinculacion_ofertas', [VinculacionController::class, 'index'])->name('vinculacion.index');
 Route::get('/vinculacion/cambiarEstadoResidencia/{id}/{estado}', [VinculacionController::class, 'cambiarEstadoResidencia'])->name('vinculacion.cambiarEstadoResidencia');
 Route::get('/vinculacion/cambiarEstadoTrabajo/{id}/{estado}', [VinculacionController::class, 'cambiarEstadoTrabajo'])->name('vinculacion.cambiarEstadoTrabajo');
+//focus group
+Route::get('/focus-group/mostrar', [VinculacionController::class, 'mostrarFocusGroup']);
+Route::get('/focus-group/crear', [VinculacionController::class, 'crearFG']);
+Route::post('/focus-group/crear', [VinculacionController::class, 'guardarFG'])->name('focus-group.guardar');
+Route::get('/focus-group/editar{id}', [VinculacionController::class, 'editarFG']);
+Route::get('/focus-group/eliminar/{id}', [VinculacionController::class, 'eliminarFG']);
+Route::post('/focus-group/actualizarFG{id}', [VinculacionController::class, 'actualizarFG']);
+Route::get('/focus-group/entrar{id}', [VinculacionController::class, 'entrarFG']);
+Route::post('/focus-group/enviar-mensaje', [VinculacionController::class, 'enviarMensaje'])->name('focus-group.enviar-mensaje');
+
 
 //mostrarAlumnos
 Route::get('/mostrarAlumnos', [UsuarioAlumnoController::class, 'index']);
@@ -93,8 +103,12 @@ Route::post('/ofertas{id}',[AlumnoController::class, 'eliminarAsignacion'])->nam
 Route::get('/perfil',[AlumnoController::class, 'perfil']);
 Route::post('/perfil',[AlumnoController::class, 'perfil']);
 Route::post('/guardarPerfil',[AlumnoController::class, 'guardarPerfil'])->name('alumno.guardarPerfil');
+Route::get('/alumno/focus-groups/mostrar',[AlumnoController::class, 'mostrarFocusGroups']);
+Route::get('/alumno/focus-group/entrar{id}', [AlumnoController::class, 'entrarFG']);
+Route::post('/alumno/focus-group/enviar-mensaje', [AlumnoController::class, 'enviarMensaje'])->name('focus-group.enviar-mensaje');
 
-//vitas para empleadores
+
+//vistas para empleadores
 Route::get('/dashboardEmpresa', [EmpresaController::class, 'index']);
 Route::get('/editor-oferta', [EmpresaController::class, 'abirEditor']);
 Route::post('/editor-oferta', [EmpresaController::class, 'create'])->name('empresa.editor');
@@ -106,6 +120,11 @@ Route::get('/eliminarResidencia/{id}', [EmpresaController::class, 'delResidencia
 Route::get('/eliminarTrabajo/{id}', [EmpresaController::class, 'delTrabajo']);
 Route::get('/aspirantes-oferta/residencia{id}', [EmpresaController::class, 'aspirantesResidencia']);
 Route::get('/aspirantes-oferta/trabajo{id}', [EmpresaController::class, 'aspirantesTrabajo']);
+Route::get('/empleador/focus-group/mostrar',[EmpresaController::class, 'mostrarFocusGroups']);
+Route::get('/empleador/focus-group/entrar{id}', [EmpresaController::class, 'entrarFG']);
+Route::post('/empleador/focus-group/enviar-mensaje', [EmpresaController::class, 'enviarMensaje'])->name('focus-group.enviar-mensaje');
+
+
 //Route::get('/mostrarEncuesta/{id}', [EncuestasController::class, 'show']);
 /*
 Route::get('/editorEncuesta', function () {

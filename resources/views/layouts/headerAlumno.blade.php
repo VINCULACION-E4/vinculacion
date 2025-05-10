@@ -26,6 +26,7 @@
         <nav class="hidden md:flex space-x-6">
             <a href="/ofertas" class="hover:text-gray-200">Ofertas</a>
             <a href="/dashboard/encuestas" class="hover:text-gray-200">Encuestas</a>
+            <a href="/alumno/focus-groups/mostrar" class="hover:text-gray-200">Focus groups</a>
         </nav>
 
         @php
