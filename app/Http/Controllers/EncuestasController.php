@@ -151,4 +151,8 @@ class EncuestasController extends Controller
         $asRespuestas = RespuestasPregunta::where('idencuesta', $id)->get();
         return view('encuestas.mostrarResultados' , compact('encuesta', 'preguntas', 'asRespuestas'));
     }
+
+    public function enviar($id){
+        return view('encuestas.enviar', compact('id'));
+    }
 }

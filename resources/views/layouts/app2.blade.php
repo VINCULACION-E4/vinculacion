@@ -15,9 +15,11 @@
             <span class="ml-3 text-xl">Vinculación</span>
         </a>
         <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
-          <a href="/mostrarAlumnos" class="mr-5 hover:text-gray-900">Usuarios  |</a>
-          <a href="/menuEncuestas" class="mr-5 hover:text-gray-900">Encuestas  |</a>
-          <a href="/vinculacion_ofertas" class="mr-5 hover:text-gray-900">Ofertas</a>
+            <a href="/mostrarAlumnos" class="mr-5 hover:text-gray-900">Usuarios  |</a>
+            <a href="/menuEncuestas" class="mr-5 hover:text-gray-900">Encuestas  |</a>
+            <a href="/vinculacion_ofertas" class="mr-5 hover:text-gray-900">Ofertas |</a>
+            <a href="/indicadores-clave" class="mr-5 hover:text-gray-900">Indicadores clave |</a>
+            <a href="/focus-group/mostrar" class="mr-5 hover:text-gray-900">Focus Group</a>
   
           @if(isset($authUser))
           <div class="relative inline-block text-left">

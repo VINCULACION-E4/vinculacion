@@ -40,6 +40,8 @@ use App\Http\Controllers\AlumnoController;
 use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\TestController;
 
+use Illuminate\Support\Facades\Mail;
+use App\Mail\EnviarCorreo;
 
 Route::get('/', function () {
     return view('login');
@@ -92,6 +94,15 @@ Route::post('/editorEncuesta/{id}', [EncuestasController::class, 'actualizar']);
 Route::get('/resultadosEncuesta/{id}', [EncuestasController::class, 'mostrarResultados']);
 Route::get('/confirmarCambios/{id}', [EncuestasController::class, 'confirmar']);
 Route::get('/eliminarEncuesta/{id}', [EncuestasController::class, 'delate']);
+Route::get('/enviarEncuesta/{id}', [EncuestasController::class, 'enviar']);
+Route::post('/encuesta/enviada', function (\Illuminate\Http\Request $request) {
+    $destinatario = $request->input('para');
+    $asunto = $request->input('asunto');
+    $mensaje = $request->input('mensaje');
+    Mail::to($destinatario)->send(new EnviarCorreo($asunto, $mensaje));
+    return view('encuestas.envioExitoso');
+});
+
 //Vistas usuarioAlumno
 Route::get('/dashboard/encuestas',[AlumnoController::class, 'mostrarEncuestas']);
 Route::post('/dashboard/encuestas',[AlumnoController::class, 'mostrarEncuestas']);
@@ -106,7 +117,6 @@ Route::post('/guardarPerfil',[AlumnoController::class, 'guardarPerfil'])->name('
 Route::get('/alumno/focus-groups/mostrar',[AlumnoController::class, 'mostrarFocusGroups']);
 Route::get('/alumno/focus-group/entrar{id}', [AlumnoController::class, 'entrarFG']);
 Route::post('/alumno/focus-group/enviar-mensaje', [AlumnoController::class, 'enviarMensaje'])->name('focus-group.enviar-mensaje');
-
 
 //vistas para empleadores
 Route::get('/dashboardEmpresa', [EmpresaController::class, 'index']);

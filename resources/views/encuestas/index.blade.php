@@ -31,14 +31,15 @@
 
     <div class="container mx-auto px-4">
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            @foreach($encuestas as $encuesta)
+           @foreach($encuestas as $encuesta)
                 <div class="p-4">
                     <div class="bg-white p-6 rounded-lg shadow-lg">
                         <h2 class="text-lg text-gray-700 font-semibold">{{ $encuesta->titulo }}</h2>
                         <p class="text-gray-500 mt-2">{{ $encuesta->descripcion }}</p>
-                        <div class="mt-4 flex flex-col sm:flex-row justify-between space-y-2 sm:space-y-0 sm:space-x-4">
-                            <a href="/editorEncuesta/{{ $encuesta->idencuesta }}" class="text-blue-500">Ver/editar encuesta</a>
-                            <a href="/resultadosEncuesta/{{ $encuesta->idencuesta }}" class="text-purple-600">Reporte de resultados</a>
+                        <div class="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-2">
+                            <a href="/editorEncuesta/{{ $encuesta->idencuesta }}" class="text-blue-500 text-center bg-blue-100 hover:bg-blue-200 py-2 rounded">Ver/editar encuesta</a>
+                            <a href="/resultadosEncuesta/{{ $encuesta->idencuesta }}" class="text-purple-600 text-center bg-purple-100 hover:bg-purple-200 py-2 rounded">Reporte de resultados</a>
+                            <a href="/enviarEncuesta/{{ $encuesta->idencuesta }}" class="text-green-600 text-center bg-green-100 hover:bg-green-200 py-2 rounded">Enviar a...</a>
                         </div>
                     </div>
                 </div>
