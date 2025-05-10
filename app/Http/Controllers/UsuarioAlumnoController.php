@@ -9,6 +9,8 @@ use App\Models\OfertasResidencium;
 
 use App\Models\UsuariosAlumno;
 use App\Models\Alumno;
+use App\Models\Carrera;
+use App\Models\AtributosEgreso;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
@@ -105,5 +107,23 @@ class UsuarioAlumnoController extends Controller
         };
 
         return Response::stream($callback, 200, $headers);
+    }
+
+    public function mostrarIndicadoresClave()
+    {
+        $carreras = Carrera::all();
+        $atributos = AtributosEgreso::all();
+        $alumnos = Alumno::all();
+        return view('usuariosAlumnos.indicadoresClave', compact('carreras', 'atributos', 'alumnos'));
+    }
+
+    public function actualizarAtributos(Request $request)
+    {
+        $atributo = AtributosEgreso::find($request->input('idatributo'));
+        $atributo->competencias = $request->input('competencias');
+        $atributo->habilidades = $request->input('habilidades');
+        $atributo->tecnologias_dominadas = $request->input('tecnologias_dominadas');
+        $atributo->save();
+        return redirect()->back()->with('success', 'Atributo actualizado correctamente.');
     }
 }

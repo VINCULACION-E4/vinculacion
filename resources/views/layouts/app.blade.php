@@ -19,8 +19,8 @@
       <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
         <a href="/mostrarAlumnos" class="mr-5 hover:text-gray-900">Usuarios  |</a>
         <a href="/menuEncuestas" class="mr-5 hover:text-gray-900">Encuestas  |</a>
-        <a href="/vinculacion_ofertas" class="mr-5 hover:text-gray-900">Ofertas</a>
-
+        <a href="/vinculacion_ofertas" class="mr-5 hover:text-gray-900">Ofertas |</a>
+        <a href="/indicadores-clave" class="mr-5 hover:text-gray-900">Indicadores clave </a>
         @if(isset($authUser))
         <div class="relative inline-block text-left">
             <button id="userMenuButton" class="flex items-center bg-gray-100 border border-gray-300 py-2 px-4 rounded-lg text-gray-900 hover:bg-gray-200 focus:outline-none">

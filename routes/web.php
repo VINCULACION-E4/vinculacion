@@ -56,7 +56,9 @@ Route::post('/mostrarAlumnos', [UsuarioAlumnoController::class, 'index']);
 Route::get('/infoAlumno/{id}', [UsuarioAlumnoController::class, 'mostrarInfo']);
 Route::post('/infoAlumno/{id}', [UsuarioAlumnoController::class, 'actualizarAlumno']);
 Route::get('/alumnosCSV', [UsuarioAlumnoController::class, 'alumnosCSV']);
-
+Route::get('/indicadores-clave', [UsuarioAlumnoController::class, 'mostrarIndicadoresClave']);
+Route::post('/indicadores-clave', [UsuarioAlumnoController::class, 'mostrarIndicadoresClave'])->name('usuariosAlumnos.mostrarIndicadoresClave');
+Route::post('/indicadores-clave/actualizar-atributos', [UsuarioAlumnoController::class, 'actualizarAtributos']);
 
 //Empleadores desde vinculacion
 Route::get('/mostrarEmpleadores', [UsuarioEmpleadorController::class, 'index']);
@@ -65,8 +67,6 @@ Route::post('/infoEmpleador/{id}', [UsuarioEmpleadorController::class, 'mostrarI
 Route::post('/infoEmpleador/actualizarEmpleador/{id}', [UsuarioEmpleadorController::class, 'actualizarEmpleador']);
 Route::get('/infoEmpleador/eliminar/{id}', [UsuarioEmpleadorController::class, 'eliminarEmpleador']);
 Route::get('/empleadoresCSV', [UsuarioEmpleadorController::class, 'empleadoresCSV']);
-
-
 Route::get('/infoResidencia/{id}', [UsuarioEmpleadorController::class, 'mostrarResidencia']);
 Route::post('/infoResidencia/{id}', [UsuarioEmpleadorController::class, 'eliminarResidencia']);
 Route::get('/infoTrabajo/{id}', [UsuarioEmpleadorController::class, 'mostrarTrabajo']);
