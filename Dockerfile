@@ -14,7 +14,7 @@ RUN apt-get update && apt-get install -y \
     nodejs
 
 # Instala extensiones de PHP requeridas
-RUN docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath gd
+RUN docker-php-ext-install pdo pdo_mysql pdo_pgsql mbstring exif pcntl bcmath gd
 
 # Instala Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
