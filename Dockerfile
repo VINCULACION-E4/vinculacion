@@ -11,7 +11,8 @@ RUN apt-get update && apt-get install -y \
     curl \
     git \
     npm \
-    nodejs
+    nodejs \
+    libpq-dev
 
 # Instala extensiones de PHP requeridas
 RUN docker-php-ext-install pdo pdo_mysql pdo_pgsql mbstring exif pcntl bcmath gd
